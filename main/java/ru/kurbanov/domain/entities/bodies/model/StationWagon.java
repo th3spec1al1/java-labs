@@ -1,0 +1,11 @@
+package ru.kurbanov.domain.entities.bodies.model;
+
+import ru.kurbanov.domain.entities.bodies.Body;
+
+public class StationWagon implements Body {
+
+    @Override
+    public String getType() {
+        return "StationWagon";
+    }
+}
