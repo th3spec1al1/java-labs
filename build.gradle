@@ -23,6 +23,8 @@ dependencies {
     testImplementation 'org.testcontainers:postgresql:1.19.7'
     testImplementation 'org.postgresql:postgresql:42.7.4'
     testRuntimeOnly 'org.slf4j:slf4j-simple:2.0.13'
+    compileOnly 'org.projectlombok:lombok:1.18.36'
+    annotationProcessor 'org.projectlombok:lombok:1.18.36'
 }
 
 configurations {
