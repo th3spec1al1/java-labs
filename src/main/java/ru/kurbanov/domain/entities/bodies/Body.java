@@ -1,6 +1,13 @@
 package ru.kurbanov.domain.entities.bodies;
 
-public interface Body {
+import lombok.Getter;
 
-    String getType();
+@Getter
+public abstract class Body {
+
+    private final String type;
+
+    protected Body(String type) {
+        this.type = type;
+    }
 }

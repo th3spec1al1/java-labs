@@ -2,10 +2,9 @@ package ru.kurbanov.domain.entities.bodies.model;
 
 import ru.kurbanov.domain.entities.bodies.Body;
 
-public class StationWagon implements Body {
+public class StationWagon extends Body {
 
-    @Override
-    public String getType() {
-        return "StationWagon";
+    public StationWagon() {
+        super("StationWagon");
     }
 }
