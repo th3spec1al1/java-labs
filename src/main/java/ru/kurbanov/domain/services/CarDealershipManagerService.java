@@ -4,10 +4,11 @@ import lombok.AllArgsConstructor;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.cars.CarFilter;
 import ru.kurbanov.domain.entities.cars.TestDrive;
-import ru.kurbanov.domain.entities.orders.Order;
-import ru.kurbanov.domain.entities.restrictions.CarRestriction;
+import ru.kurbanov.domain.entities.orders.available.AvailableOrder;
+import ru.kurbanov.domain.entities.orders.custom.CustomOrder;
 import ru.kurbanov.repositories.CarRepository;
-import ru.kurbanov.repositories.OrderRepository;
+import ru.kurbanov.repositories.AvailableOrderRepository;
+import ru.kurbanov.repositories.CustomOrderRepository;
 import ru.kurbanov.repositories.TestDriveRepository;
 
 import java.util.Collection;
@@ -17,23 +18,30 @@ import java.util.UUID;
 public class CarDealershipManagerService {
 
     private final CarRepository carRepository;
-    private final OrderRepository orderRepository;
+    private final AvailableOrderRepository availableOrderRepository;
+    private final CustomOrderRepository customOrderRepository;
     private final TestDriveRepository testDriveRepository;
-
-    public Collection<Car> allCars() {
-        return carRepository.show();
-    }
 
     public Car showCar(UUID id) {
         return carRepository.findById(id);
     }
 
-    public Collection<Order> allOrders() {
-        return orderRepository.show();
+    public Collection<Car> allCars() {
+        return carRepository.show();
     }
 
-    public Collection<TestDrive> allTestDrives() {
-        return testDriveRepository.show();
+    public Collection<Car> searchByFilters(CarFilter carFilter) {
+        Collection<Car> res = this.allCars();
+        res = carFilter.apply(res);
+        return res;
+    }
+
+    public Collection<AvailableOrder> allAvailableOrders() {
+        return availableOrderRepository.show();
+    }
+
+    public Collection<CustomOrder> allCustomOrders() {
+        return customOrderRepository.show();
     }
 
     public void addTestDrive(TestDrive testDrive) {
@@ -44,10 +52,7 @@ public class CarDealershipManagerService {
         testDriveRepository.delete(testDriveRepository.findById(testDrive.getId()));
     }
 
-    public Collection<Car> searchByFilters(CarFilter carFilter, CarRestriction... carRestrictions) {
-        Collection<Car> res = this.allCars();
-        res = CarFilter.applyAll(res, carRestrictions);
-
-        return res;
+    public Collection<TestDrive> allTestDrives() {
+        return testDriveRepository.show();
     }
 }

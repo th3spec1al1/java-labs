@@ -3,10 +3,7 @@ package ru.kurbanov.domain.services;
 import lombok.AllArgsConstructor;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.details.Detail;
-import ru.kurbanov.repositories.CarRepository;
-import ru.kurbanov.repositories.DetailRepository;
-import ru.kurbanov.repositories.OrderRepository;
-import ru.kurbanov.repositories.TestDriveRepository;
+import ru.kurbanov.repositories.*;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -16,17 +13,21 @@ public class WarehouseAdminService {
 
     private final CarRepository carRepository;
     private final DetailRepository detailRepository;
-    private final OrderRepository orderRepository;
-    private final TestDriveRepository testDriveRepository;
 
     public Car addCar(Car car) {
-        carRepository.save(car);
-        return car;
+        return carRepository.save(car);
     }
 
     public Detail addDetail(Detail detail) {
-        detailRepository.save(detail);
-        return detail;
+        return detailRepository.save(detail);
+    }
+
+    public Collection<Car> allCars() {
+        return carRepository.show();
+    }
+
+    public Collection<Detail> allDetails() {
+        return detailRepository.show();
     }
 
     public Car showCar(UUID id) {
@@ -38,20 +39,10 @@ public class WarehouseAdminService {
     }
 
     public Car updateCar(Car car) {
-        carRepository.save(car);
-        return car;
+        return carRepository.save(car);
     }
 
     public Detail updateDetail(Detail detail) {
-        detailRepository.save(detail);
-        return detail;
-    }
-
-    public Collection<Car> allCars() {
-        return carRepository.show();
-    }
-
-    public Collection<Detail> allDetails() {
-        return detailRepository.show();
+        return detailRepository.save(detail);
     }
 }

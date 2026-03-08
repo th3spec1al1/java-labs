@@ -4,10 +4,11 @@ import lombok.AllArgsConstructor;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.cars.CarFilter;
 import ru.kurbanov.domain.entities.cars.TestDrive;
-import ru.kurbanov.domain.entities.orders.Order;
-import ru.kurbanov.domain.entities.restrictions.CarRestriction;
+import ru.kurbanov.domain.entities.orders.available.AvailableOrder;
+import ru.kurbanov.domain.entities.orders.custom.CustomOrder;
 import ru.kurbanov.repositories.CarRepository;
-import ru.kurbanov.repositories.OrderRepository;
+import ru.kurbanov.repositories.AvailableOrderRepository;
+import ru.kurbanov.repositories.CustomOrderRepository;
 import ru.kurbanov.repositories.TestDriveRepository;
 
 import java.util.Collection;
@@ -17,29 +18,33 @@ import java.util.UUID;
 public class CustomerService {
 
     private final CarRepository carRepository;
-    private final OrderRepository orderRepository;
+    private final AvailableOrderRepository availableOrderRepository;
+    private final CustomOrderRepository customOrderRepository;
     private final TestDriveRepository testDriveRepository;
-
-    public Collection<Car> allCars() {
-        return carRepository.show();
-    }
 
     public Car showCar(UUID id) {
         return carRepository.findById(id);
     }
 
-    public void addOrder(Order order) {
-        orderRepository.save(order);
+    public Collection<Car> allCars() {
+        return carRepository.show();
+    }
+
+    public Collection<Car> searchByFilters(CarFilter carFilter) {
+        Collection<Car> res = this.allCars();
+        res = carFilter.apply(res);
+        return res;
+    }
+
+    public void addAvailableOrder(AvailableOrder availableOrder) {
+        availableOrderRepository.save(availableOrder);
+    }
+
+    public void addCustomOrder(CustomOrder customOrder) {
+        customOrderRepository.save(customOrder);
     }
 
     public void addTestDrive(TestDrive testDrive) {
         testDriveRepository.save(testDrive);
-    }
-
-    public Collection<Car> searchByFilters(CarFilter carFilter, CarRestriction... carRestrictions) {
-        Collection<Car> res = this.allCars();
-        res = CarFilter.applyAll(res, carRestrictions);
-
-        return res;
     }
 }
