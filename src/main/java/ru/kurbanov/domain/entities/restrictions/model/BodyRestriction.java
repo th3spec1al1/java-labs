@@ -8,6 +8,6 @@ public record BodyRestriction(Body body) implements CarRestriction {
 
     @Override
     public boolean fits(Car car) {
-        return car.getBody().equals(body);
+        return car.getBody().getType().equals(body.getType());
     }
 }
