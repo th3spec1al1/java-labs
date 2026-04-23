@@ -35,7 +35,7 @@ public class CarBuilder {
     }
 
     public CarBuilder withSelectedDetail(Detail detail) {
-        if (!detail.getModels().contains(this.model)) {
+        if (!detail.getModels().contains(this.brand + " " + this.model)) {
             throw new IncompatibleComponentException("You can't suit this detail - " + detail.getName()
                     + " with this car - " + brand + " " + model);
         }
