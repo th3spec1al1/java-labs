@@ -1,7 +1,7 @@
 package ru.kurbanov;
 
 import org.junit.jupiter.api.Test;
-import ru.kurbanov.domain.builders.CarBuilder;
+import ru.kurbanov.domain.entities.cars.CarBuilder;
 import ru.kurbanov.domain.entities.bodies.Body;
 import ru.kurbanov.domain.entities.bodies.model.Sedan;
 import ru.kurbanov.domain.entities.cars.Car;
@@ -10,10 +10,10 @@ import ru.kurbanov.domain.entities.engines.Engine;
 import ru.kurbanov.domain.enums.FuelType;
 import ru.kurbanov.domain.exceptions.DomainValidationException;
 import ru.kurbanov.domain.exceptions.IncompatibleComponentException;
-import ru.kurbanov.domain.factories.details.model.InteriorFactory;
-import ru.kurbanov.domain.factories.details.model.SteeringWheelFactory;
-import ru.kurbanov.domain.factories.details.model.TransmissionFactory;
-import ru.kurbanov.domain.factories.details.model.WheelsFactory;
+import ru.kurbanov.domain.entities.details.factories.model.InteriorFactory;
+import ru.kurbanov.domain.entities.details.factories.model.SteeringWheelFactory;
+import ru.kurbanov.domain.entities.details.factories.model.TransmissionFactory;
+import ru.kurbanov.domain.entities.details.factories.model.WheelsFactory;
 import ru.kurbanov.domain.vo.Displacement;
 import ru.kurbanov.domain.vo.Power;
 

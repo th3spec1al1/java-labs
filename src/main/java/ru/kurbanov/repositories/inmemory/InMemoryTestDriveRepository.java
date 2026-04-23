@@ -1,6 +1,6 @@
 package ru.kurbanov.repositories.inmemory;
 
-import ru.kurbanov.domain.entities.cars.TestDrive;
+import ru.kurbanov.domain.entities.testdrives.TestDrive;
 import ru.kurbanov.repositories.TestDriveRepository;
 
 import java.util.Collection;

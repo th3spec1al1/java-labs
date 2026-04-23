@@ -1,6 +1,6 @@
 package ru.kurbanov.repositories;
 
-import ru.kurbanov.domain.entities.cars.TestDrive;
+import ru.kurbanov.domain.entities.testdrives.TestDrive;
 
 import java.util.Collection;
 import java.util.UUID;

@@ -3,7 +3,7 @@ package ru.kurbanov.domain.services;
 import lombok.AllArgsConstructor;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.cars.CarFilter;
-import ru.kurbanov.domain.entities.cars.TestDrive;
+import ru.kurbanov.domain.entities.testdrives.TestDrive;
 import ru.kurbanov.domain.entities.orders.available.AvailableOrder;
 import ru.kurbanov.domain.entities.orders.custom.CustomOrder;
 import ru.kurbanov.repositories.CarRepository;
