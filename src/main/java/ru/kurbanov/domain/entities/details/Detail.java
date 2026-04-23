@@ -14,14 +14,14 @@ public abstract class Detail {
 
     private final String brand;
     private final BigDecimal price;
-    private final List<String> models;
+    private final List<String> compatibleModels;
 
     protected Detail(String name, String brand, BigDecimal price, List<String> models) {
         this.id = UUID.randomUUID();
         this.name = name;
         this.brand = brand;
         this.price = price;
-        this.models = models;
+        this.compatibleModels = models;
     }
 
     public abstract String getType();
