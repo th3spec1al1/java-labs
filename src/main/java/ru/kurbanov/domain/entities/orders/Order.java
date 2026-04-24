@@ -23,4 +23,6 @@ public abstract class Order {
     }
 
     public abstract String getOrderStatus();
+
+    public abstract String getOrderType();
 }
