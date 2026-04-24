@@ -1,4 +1,4 @@
-package ru.kurbanov.domain.jpa.model;
+package ru.kurbanov.persistence.jpa.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,8 +6,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import ru.kurbanov.domain.jpa.BaseEntity;
-import ru.kurbanov.domain.jpa.listeners.BaseEntityListener;
+import ru.kurbanov.persistence.jpa.listeners.BaseEntityListener;
 
 import java.time.ZonedDateTime;
 import java.util.UUID;

@@ -3,7 +3,7 @@ package ru.kurbanov.domain.services;
 import lombok.AllArgsConstructor;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.details.Detail;
-import ru.kurbanov.repositories.*;
+import ru.kurbanov.repository.*;
 
 import java.util.Collection;
 import java.util.UUID;

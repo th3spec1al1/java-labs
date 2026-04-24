@@ -1,4 +1,4 @@
-package ru.kurbanov.domain.jpa;
+package ru.kurbanov.persistence.jpa.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;

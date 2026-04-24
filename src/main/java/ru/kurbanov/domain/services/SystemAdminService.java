@@ -6,7 +6,7 @@ import ru.kurbanov.domain.entities.testdrives.TestDrive;
 import ru.kurbanov.domain.entities.details.Detail;
 import ru.kurbanov.domain.entities.orders.available.AvailableOrder;
 import ru.kurbanov.domain.entities.orders.custom.CustomOrder;
-import ru.kurbanov.repositories.*;
+import ru.kurbanov.repository.*;
 
 import java.util.UUID;
 

@@ -6,10 +6,10 @@ import ru.kurbanov.domain.entities.cars.CarFilter;
 import ru.kurbanov.domain.entities.testdrives.TestDrive;
 import ru.kurbanov.domain.entities.orders.available.AvailableOrder;
 import ru.kurbanov.domain.entities.orders.custom.CustomOrder;
-import ru.kurbanov.repositories.CarRepository;
-import ru.kurbanov.repositories.AvailableOrderRepository;
-import ru.kurbanov.repositories.CustomOrderRepository;
-import ru.kurbanov.repositories.TestDriveRepository;
+import ru.kurbanov.repository.CarRepository;
+import ru.kurbanov.repository.AvailableOrderRepository;
+import ru.kurbanov.repository.CustomOrderRepository;
+import ru.kurbanov.repository.TestDriveRepository;
 
 import java.util.Collection;
 import java.util.UUID;

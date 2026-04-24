@@ -1,4 +1,4 @@
-package ru.kurbanov.repositories;
+package ru.kurbanov.repository;
 
 import ru.kurbanov.domain.entities.orders.available.AvailableOrder;
 
