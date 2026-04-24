@@ -21,21 +21,21 @@ public class Car {
     private final Engine engine;
     private final Body body;
     private final CarDrive carDrive;
-    private final GearboxType gearbox;
+    private final GearboxType gearboxType;
     private final Map<String, Detail> details;
     private final String color;
 
     private final BigDecimal basePrice;
 
     public Car(String brand, String model, Engine engine, Body body, CarDrive carDrive,
-               GearboxType gearbox, Map<String, Detail> details, String color, BigDecimal basePrice) {
+               GearboxType gearboxType, Map<String, Detail> details, String color, BigDecimal basePrice) {
         this.id = UUID.randomUUID();
         this.brand = brand;
         this.model = model;
         this.engine = engine;
         this.body = body;
         this.carDrive = carDrive;
-        this.gearbox = gearbox;
+        this.gearboxType = gearboxType;
         this.details = details;
         this.color = color;
         this.basePrice = basePrice;

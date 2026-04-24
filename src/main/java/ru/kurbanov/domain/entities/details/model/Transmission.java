@@ -14,6 +14,6 @@ public class Transmission extends Detail {
 
     @Override
     public String getType() {
-        return "Transmission";
+        return "TRANSMISSION";
     }
 }

@@ -22,20 +22,20 @@ public class CarBuilder {
     private final Engine engine;
     private final Body body;
     private final CarDrive carDrive;
-    private final GearboxType gearbox;
+    private final GearboxType gearboxType;
     private final Map<String, Detail> details = new HashMap<>();
     private final String color;
     private final BigDecimal basePrice;
 
     @Builder
     public CarBuilder(String brand, String model, Engine engine, Body body, CarDrive carDrive,
-                      GearboxType gearbox, String color, BigDecimal basePrice) {
+                      GearboxType gearboxType, String color, BigDecimal basePrice) {
         this.brand = brand;
         this.model = model;
         this.engine = engine;
         this.body = body;
         this.carDrive = carDrive;
-        this.gearbox = gearbox;
+        this.gearboxType = gearboxType;
         this.color = color;
         this.basePrice = basePrice;
     }
@@ -51,11 +51,11 @@ public class CarBuilder {
 
     public Car build() {
         this.checkDetails();
-        return new Car(brand, model, engine, body, carDrive, gearbox, details, color, basePrice);
+        return new Car(brand, model, engine, body, carDrive, gearboxType, details, color, basePrice);
     }
 
     private void checkDetails() {
-        String[] necessaryDetails = {"Interior", "SteeringWheel", "Transmission", "Wheels"};
+        String[] necessaryDetails = {"INTERIOR", "STEERING_WHEEL", "TRANSMISSION", "WHEELS"};
 
         for (String detail : necessaryDetails) {
             if (!details.containsKey(detail)) {

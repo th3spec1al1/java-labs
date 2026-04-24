@@ -6,7 +6,7 @@ import ru.kurbanov.domain.entities.orders.custom.statuses.CustomOrderStatus;
 public class PaidCustomOrderStatus implements CustomOrderStatus {
 
     @Override
-    public String getOrderStatus() { return "paid"; }
+    public String getOrderStatus() { return "PAID"; }
 
     @Override
     public boolean tryCreate(CustomOrder order) {

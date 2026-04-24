@@ -6,7 +6,7 @@ import ru.kurbanov.domain.entities.orders.available.statuses.AvailableOrderStatu
 public class PaidAvailableOrderStatus implements AvailableOrderStatus {
 
     @Override
-    public String getOrderStatus() { return "paid"; }
+    public String getOrderStatus() { return "PAID"; }
 
     @Override
     public boolean tryCreate(AvailableOrder order) {

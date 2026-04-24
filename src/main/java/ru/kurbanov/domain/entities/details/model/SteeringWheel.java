@@ -14,6 +14,6 @@ public class SteeringWheel extends Detail {
 
     @Override
     public String getType() {
-        return "SteeringWheel";
+        return "STEERING_WHEEL";
     }
 }

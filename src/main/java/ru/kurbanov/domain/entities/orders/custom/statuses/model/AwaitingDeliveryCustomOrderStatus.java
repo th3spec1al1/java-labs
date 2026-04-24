@@ -6,7 +6,7 @@ import ru.kurbanov.domain.entities.orders.custom.statuses.CustomOrderStatus;
 public class AwaitingDeliveryCustomOrderStatus implements CustomOrderStatus {
 
     @Override
-    public String getOrderStatus() { return "awaiting delivery"; }
+    public String getOrderStatus() { return "AWAITING_DELIVERY"; }
 
     @Override
     public boolean tryCreate(CustomOrder order) {

@@ -6,7 +6,7 @@ import ru.kurbanov.domain.entities.orders.custom.statuses.CustomOrderStatus;
 public class AwaitingPayCustomOrderStatus implements CustomOrderStatus {
 
     @Override
-    public String getOrderStatus() { return "awaiting pay"; }
+    public String getOrderStatus() { return "AWAITING_PAY"; }
 
     @Override
     public boolean tryCreate(CustomOrder order) {

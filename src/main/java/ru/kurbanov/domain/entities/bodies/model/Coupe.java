@@ -5,6 +5,6 @@ import ru.kurbanov.domain.entities.bodies.Body;
 public class Coupe extends Body {
 
     public Coupe() {
-        super("Coupe");
+        super("COUPE");
     }
 }

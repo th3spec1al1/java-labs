@@ -13,6 +13,6 @@ public class Wheels extends Detail {
 
     @Override
     public String getType() {
-        return "Wheels";
+        return "WHEELS";
     }
 }

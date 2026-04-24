@@ -6,7 +6,7 @@ import ru.kurbanov.domain.entities.orders.custom.statuses.CustomOrderStatus;
 public class CompletedCustomOrderStatus implements CustomOrderStatus {
 
     @Override
-    public String getOrderStatus() { return "completed"; }
+    public String getOrderStatus() { return "COMPLETED"; }
 
     @Override
     public boolean tryCreate(CustomOrder order) {

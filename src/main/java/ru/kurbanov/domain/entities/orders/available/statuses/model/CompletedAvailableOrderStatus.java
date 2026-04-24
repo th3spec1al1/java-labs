@@ -6,7 +6,7 @@ import ru.kurbanov.domain.entities.orders.available.statuses.AvailableOrderStatu
 public class CompletedAvailableOrderStatus implements AvailableOrderStatus {
 
     @Override
-    public String getOrderStatus() { return "completed"; }
+    public String getOrderStatus() { return "COMPLETED"; }
 
     @Override
     public boolean tryCreate(AvailableOrder order) {

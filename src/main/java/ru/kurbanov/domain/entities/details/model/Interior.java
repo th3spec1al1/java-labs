@@ -13,6 +13,6 @@ public class Interior extends Detail {
 
     @Override
     public String getType() {
-        return "Interior";
+        return "INTERIOR";
     }
 }

@@ -24,7 +24,7 @@ public class AvailableOrder extends Order {
 
     @Override
     public String getOrderType() {
-        return "available";
+        return "AVAILABLE";
     }
 
     public void updateStatus(AvailableOrderStatus status) {

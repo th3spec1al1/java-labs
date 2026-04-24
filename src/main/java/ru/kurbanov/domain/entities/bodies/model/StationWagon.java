@@ -5,6 +5,6 @@ import ru.kurbanov.domain.entities.bodies.Body;
 public class StationWagon extends Body {
 
     public StationWagon() {
-        super("StationWagon");
+        super("STATION WAGON");
     }
 }
