@@ -60,10 +60,10 @@ public class CarTests {
         assertEquals(new Power(200), car.getEngine().power());
         assertEquals(new Displacement(4), car.getEngine().displacement());
         assertEquals(FuelType.PETROL, car.getEngine().fuelType());
-        assertTrue(car.getDetails().containsKey("Interior"));
-        assertTrue(car.getDetails().containsKey("SteeringWheel"));
-        assertTrue(car.getDetails().containsKey("Wheels"));
-        assertTrue(car.getDetails().containsKey("Transmission"));
+        assertTrue(car.getDetails().containsKey("INTERIOR"));
+        assertTrue(car.getDetails().containsKey("STEERING_WHEEL"));
+        assertTrue(car.getDetails().containsKey("WHEELS"));
+        assertTrue(car.getDetails().containsKey("TRANSMISSION"));
         assertEquals(new BigDecimal(4_500_000), car.getBasePrice());
         assertEquals(new BigDecimal(4_610_000), car.getFinalPrice());
     }
@@ -93,7 +93,7 @@ public class CarTests {
         Exception exception = assertThrows(DomainValidationException.class, carBuilder::build);
 
         // Assert
-        assertEquals("You can't build car without necessary detail - Interior", exception.getMessage());
+        assertEquals("You can't build car without necessary detail - INTERIOR", exception.getMessage());
     }
 
     @Test
