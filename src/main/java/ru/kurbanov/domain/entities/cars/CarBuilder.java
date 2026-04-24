@@ -3,6 +3,8 @@ package ru.kurbanov.domain.entities.cars;
 import lombok.Builder;
 import lombok.Getter;
 import ru.kurbanov.domain.entities.bodies.Body;
+import ru.kurbanov.domain.entities.cars.enums.CarDrive;
+import ru.kurbanov.domain.entities.cars.enums.GearboxType;
 import ru.kurbanov.domain.entities.details.Detail;
 import ru.kurbanov.domain.entities.engines.Engine;
 import ru.kurbanov.domain.exceptions.DomainValidationException;
@@ -19,17 +21,21 @@ public class CarBuilder {
     private final String model;
     private final Engine engine;
     private final Body body;
+    private final CarDrive carDrive;
+    private final GearboxType gearbox;
     private final Map<String, Detail> details = new HashMap<>();
     private final String color;
     private final BigDecimal basePrice;
 
     @Builder
-    public CarBuilder(String brand, String model, Engine engine, Body body,
-                      String color, BigDecimal basePrice) {
+    public CarBuilder(String brand, String model, Engine engine, Body body, CarDrive carDrive,
+                      GearboxType gearbox, String color, BigDecimal basePrice) {
         this.brand = brand;
         this.model = model;
         this.engine = engine;
         this.body = body;
+        this.carDrive = carDrive;
+        this.gearbox = gearbox;
         this.color = color;
         this.basePrice = basePrice;
     }
@@ -45,7 +51,7 @@ public class CarBuilder {
 
     public Car build() {
         this.checkDetails();
-        return new Car(brand, model, engine, body, details, color, basePrice);
+        return new Car(brand, model, engine, body, carDrive, gearbox, details, color, basePrice);
     }
 
     private void checkDetails() {

@@ -4,7 +4,7 @@ import lombok.Getter;
 import ru.kurbanov.domain.entities.bodies.Body;
 import ru.kurbanov.domain.entities.restrictions.CarRestriction;
 import ru.kurbanov.domain.entities.restrictions.model.*;
-import ru.kurbanov.domain.enums.FuelType;
+import ru.kurbanov.domain.entities.cars.enums.FuelType;
 import ru.kurbanov.domain.vo.Displacement;
 import ru.kurbanov.domain.vo.Power;
 

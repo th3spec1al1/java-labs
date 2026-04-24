@@ -6,9 +6,11 @@ import ru.kurbanov.domain.entities.bodies.Body;
 import ru.kurbanov.domain.entities.bodies.model.Sedan;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.cars.CarFilter;
+import ru.kurbanov.domain.entities.cars.enums.CarDrive;
+import ru.kurbanov.domain.entities.cars.enums.GearboxType;
 import ru.kurbanov.domain.entities.details.Detail;
 import ru.kurbanov.domain.entities.engines.Engine;
-import ru.kurbanov.domain.enums.FuelType;
+import ru.kurbanov.domain.entities.cars.enums.FuelType;
 import ru.kurbanov.domain.entities.details.factories.model.InteriorFactory;
 import ru.kurbanov.domain.entities.details.factories.model.SteeringWheelFactory;
 import ru.kurbanov.domain.entities.details.factories.model.TransmissionFactory;
@@ -55,8 +57,10 @@ public class FilterTests {
         Detail interior = new InteriorFactory().create("Dakota", "BMW",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body, "White", price);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body, "Black", price);
+        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
+                CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price);
+        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body,
+                CarDrive.FRONT, GearboxType.AUTOMATIC,"Black", price);
 
         Car car1 = carBuilder1
                 .withSelectedDetail(transmission)
@@ -111,10 +115,14 @@ public class FilterTests {
         Detail interior = new InteriorFactory().create("Dakota", "BMW",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body, "Gray", price1);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body, "Black", price1);
-        CarBuilder carBuilder3 = new CarBuilder("BMW", "320i", engine, body, "Gray", price2);
-        CarBuilder carBuilder4 = new CarBuilder("BMW", "320i", engine, body, "Gray", price1);
+        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
+                CarDrive.FRONT, GearboxType.AUTOMATIC,"Gray", price1);
+        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body,
+                CarDrive.FRONT, GearboxType.AUTOMATIC,"Black", price1);
+        CarBuilder carBuilder3 = new CarBuilder("BMW", "320i", engine, body,
+                CarDrive.FRONT, GearboxType.AUTOMATIC,"Gray", price2);
+        CarBuilder carBuilder4 = new CarBuilder("BMW", "320i", engine, body,
+                CarDrive.FRONT, GearboxType.AUTOMATIC,"Gray", price1);
 
         Car car1 = carBuilder1
                 .withSelectedDetail(transmission)
@@ -182,8 +190,10 @@ public class FilterTests {
         Detail interior = new InteriorFactory().create("Dakota", "BMW",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body, "White", price);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body, "Black", price);
+        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
+                CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price);
+        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body,
+                CarDrive.FRONT, GearboxType.AUTOMATIC,"Black", price);
 
         Car car1 = carBuilder1
                 .withSelectedDetail(transmission)
@@ -234,8 +244,10 @@ public class FilterTests {
         Detail interior = new InteriorFactory().create("Dakota", "BMW",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body, "White", price);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body, "Black", price);
+        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
+                CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price);
+        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body,
+                CarDrive.FRONT, GearboxType.AUTOMATIC,"Black", price);
 
         Car car1 = carBuilder1
                 .withSelectedDetail(transmission)

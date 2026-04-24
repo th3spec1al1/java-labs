@@ -1,13 +1,13 @@
 package ru.kurbanov.domain.entities.restrictions.model;
 
 import ru.kurbanov.domain.entities.cars.Car;
+import ru.kurbanov.domain.entities.cars.enums.GearboxType;
 import ru.kurbanov.domain.entities.restrictions.CarRestriction;
-import ru.kurbanov.domain.entities.cars.enums.FuelType;
 
-public record FuelRestriction(FuelType fuelType) implements CarRestriction {
+public record GearboxTypeRestriction(GearboxType gearbox) implements CarRestriction {
 
     @Override
     public boolean fits(Car car) {
-        return car.getEngine().fuelType().equals(fuelType);
+        return car.getGearbox().equals(gearbox);
     }
 }

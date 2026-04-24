@@ -5,9 +5,11 @@ import ru.kurbanov.domain.entities.cars.CarBuilder;
 import ru.kurbanov.domain.entities.bodies.Body;
 import ru.kurbanov.domain.entities.bodies.model.Sedan;
 import ru.kurbanov.domain.entities.cars.Car;
+import ru.kurbanov.domain.entities.cars.enums.CarDrive;
+import ru.kurbanov.domain.entities.cars.enums.GearboxType;
 import ru.kurbanov.domain.entities.details.Detail;
 import ru.kurbanov.domain.entities.engines.Engine;
-import ru.kurbanov.domain.enums.FuelType;
+import ru.kurbanov.domain.entities.cars.enums.FuelType;
 import ru.kurbanov.domain.exceptions.DomainValidationException;
 import ru.kurbanov.domain.exceptions.IncompatibleComponentException;
 import ru.kurbanov.domain.entities.details.factories.model.InteriorFactory;
@@ -41,7 +43,8 @@ public class CarTests {
         Detail interior = new InteriorFactory().create("Dakota", "BMW",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body, "White", price)
+        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body,
+                                                CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
                 .withSelectedDetail(wheels)
@@ -80,7 +83,8 @@ public class CarTests {
         Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
                 BigDecimal.ZERO, List.of("BMW 320i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body, "White", price)
+        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body,
+                                                CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
                 .withSelectedDetail(wheels);
@@ -109,7 +113,8 @@ public class CarTests {
         Detail interior = new InteriorFactory().create("Performance", "BMW",
                 new BigDecimal(110_000), List.of("BMW 330i", "BMW 340i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body, "White", price)
+        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body,
+                                                CarDrive.FRONT, GearboxType.AUTOMATIC, "White", price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
                 .withSelectedDetail(wheels);
