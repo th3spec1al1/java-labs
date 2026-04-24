@@ -1,0 +1,220 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-details
+      author: ru.kurbanov
+      changes:
+        - createTable:
+            tableName: details
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+              - column:
+                  name: removed
+                  type: BOOLEAN
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: DECIMAL(10, 2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: compatible_models
+                  type: TEXT[]
+
+  - changeSet:
+      id: create-cars
+      author: ru.kurbanov
+      changes:
+        - createTable:
+            tableName: cars
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+              - column:
+                  name: removed
+                  type: BOOLEAN
+              - column:
+                  name: brand
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: model
+                  type: VARCHAR(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: engine_power
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: engine_displacement
+                  type: INT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fuel_type
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: car_body
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: car_drive
+                  type: VARCHAR(10)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gearbox_type
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: wheels_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: transmission_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: steering_wheel_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: interior_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: color
+                  type: VARCHAR(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: DECIMAL(10, 2)
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create-orders
+      author: ru.kurbanov
+      changes:
+        - createTable:
+            tableName: orders
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+              - column:
+                  name: removed
+                  type: BOOLEAN
+              - column:
+                  name: order_type
+                  type: VARCHAR(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: order_status
+                  type: VARCHAR(30)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: customer_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: manager_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ordered_car_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create-test-drives
+      author: ru.kurbanov
+      changes:
+        - createTable:
+            tableName: test_drives
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+              - column:
+                  name: removed
+                  type: BOOLEAN
+              - column:
+                  name: customer_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ordered_car_id
+                  type: UUID
+                  constraints:
+                    nullable: false
+              - column:
+                  name: start_date
+                  type: TIMESTAMP WITH TIME ZONE
+                  constraints:
+                    nullable: false

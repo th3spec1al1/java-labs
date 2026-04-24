@@ -1,0 +1,88 @@
+databaseChangeLog:
+  - changeSet:
+      id: seed-details
+      author: ru.kurbanov
+      changes:
+        - sql:
+            |
+            INSERT INTO details (id, created_at, updated_at, removed, name, type, price, compatible_models)
+            VALUES
+            ('a1111111-1111-1111-1111-111111111111', now(), now(), false, '17'''' Standard', 'Wheels', 0, ARRAY['BMW 320i', 'BMW 330i']),
+            ('a2222222-2222-2222-2222-222222222222', now(), now(), false, '19'''' M-Sport', 'Wheels', 95000, ARRAY['BMW 320i', 'BMW 330i', 'BMW M340i']),
+            ('a3333333-3333-3333-3333-333333333333', now(), now(), false, '18'''' Aero', 'Wheels', 45000, ARRAY['BMW 320i', 'BMW 330i']),
+            ('b1111111-1111-1111-1111-111111111111', now(), now(), false, 'Автоматическая 8AT', 'Transmission', 0, ARRAY['BMW 320i', 'BMW 330i']),
+            ('b2222222-2222-2222-2222-222222222222', now(), now(), false, 'Механическая 6MT', 'Transmission', -30000, ARRAY['BMW 320i', 'BMW 330i']),
+            ('c1111111-1111-1111-1111-111111111111', now(), now(), false, 'Спортивный кожаный (Standard)', 'SteeringWheel', 0, ARRAY['BMW 320i', 'BMW 330i']),
+            ('c2222222-2222-2222-2222-222222222222', now(), now(), false, 'M-Sport с подогревом', 'SteeringWheel', 25000, ARRAY['BMW 320i', 'BMW 330i', 'BMW M340i']),
+            ('d1111111-1111-1111-1111-111111111111', now(), now(), false, 'Тканевый Graphite', 'Interior', 0, ARRAY['BMW 320i']),
+            ('d2222222-2222-2222-2222-222222222222', now(), now(), false, 'Кожаный Dakota', 'Interior', 110000, ARRAY['BMW 320i', 'BMW 330i']),
+            ('d3333333-3333-3333-3333-333333333333', now(), now(), false, 'Спортивный Performance', 'Interior', 160000, ARRAY['BMW 330i', 'BMW M340i']);
+
+  - changeSet:
+      id: seed-cars
+      author: ru.kurbanov
+      changes:
+        - sql:
+            |
+            INSERT INTO cars (id, created_at, updated_at, removed, brand, model, engine_power, engine_displacement, fuel_type, car_body, car_drive, gearbox_type, wheels_id, transmission_id, steering_wheel_id, interior_id, color, price)
+            VALUES
+            (
+              'e1111111-1111-1111-1111-111111111111', now(), now(), false,
+              'BMW', '320i',
+              184, 2000,
+              'PETROL', 'SEDAN', 'REAR_WHEEL_DRIVE', 'AUTOMATIC',
+              'a1111111-1111-1111-1111-111111111111',
+              'b1111111-1111-1111-1111-111111111111',
+              'c1111111-1111-1111-1111-111111111111',
+              'd1111111-1111-1111-1111-111111111111',
+              'BLACK', 3500000.00
+            ),
+            (
+              'e2222222-2222-2222-2222-222222222222', now(), now(), false,
+              'BMW', '330i',
+              258, 3000,
+              'PETROL', 'SEDAN', 'ALL_WHEEL_DRIVE', 'AUTOMATIC',
+              'a1111111-1111-1111-1111-111111111111',
+              'b1111111-1111-1111-1111-111111111111',
+              'c1111111-1111-1111-1111-111111111111',
+              'd2222222-2222-2222-2222-222222222222',
+              'WHITE', 4500000.00
+            );
+
+  - changeSet:
+      id: seed-orders
+      author: ru.kurbanov
+      changes:
+        - sql:
+            |
+            INSERT INTO orders (id, created_at, updated_at, removed, order_type, order_status, customer_id, manager_id, ordered_car_id)
+            VALUES
+            (
+              'f1111111-1111-1111-1111-111111111111', now(), now(), false,
+              'REGULAR', 'CREATED',
+              'cccccccc-cccc-cccc-cccc-cccccccccccc',
+              'dddddddd-dddd-dddd-dddd-dddddddddddd',
+              'e1111111-1111-1111-1111-111111111111'
+            ),
+            (
+              'f2222222-2222-2222-2222-222222222222', now(), now(), false,
+              'CUSTOM', 'CREATED',
+              'cccccccc-cccc-cccc-cccc-cccccccccccc',
+              'dddddddd-dddd-dddd-dddd-dddddddddddd',
+              'e2222222-2222-2222-2222-222222222222'
+            );
+
+  - changeSet:
+      id: seed-test-drives
+      author: ru.kurbanov
+      changes:
+        - sql:
+            |
+            INSERT INTO test_drives (id, created_at, updated_at, removed, customer_id, ordered_car_id, start_date)
+            VALUES
+            (
+              'g1111111-1111-1111-1111-111111111111', now(), now(), false,
+              'cccccccc-cccc-cccc-cccc-cccccccccccc',
+              'e1111111-1111-1111-1111-111111111111',
+              '2026-05-01T10:00:00+03:00'
+            );
