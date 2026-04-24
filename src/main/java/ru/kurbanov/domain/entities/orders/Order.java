@@ -21,4 +21,6 @@ public abstract class Order {
         this.manager = manager;
         this.car = car;
     }
+
+    public abstract String getOrderStatus();
 }

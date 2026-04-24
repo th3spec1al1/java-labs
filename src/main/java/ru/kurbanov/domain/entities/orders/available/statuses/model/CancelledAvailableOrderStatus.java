@@ -6,6 +6,9 @@ import ru.kurbanov.domain.entities.orders.available.statuses.AvailableOrderStatu
 public class CancelledAvailableOrderStatus implements AvailableOrderStatus {
 
     @Override
+    public String getOrderStatus() { return "cancelled"; }
+
+    @Override
     public boolean tryCreate(AvailableOrder order) {
         return false;
     }

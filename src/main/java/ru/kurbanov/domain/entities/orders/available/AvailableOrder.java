@@ -17,6 +17,11 @@ public class AvailableOrder extends Order {
         this.status = status;
     }
 
+    @Override
+    public String getOrderStatus() {
+        return status.getOrderStatus();
+    }
+
     public void updateStatus(AvailableOrderStatus status) {
         this.status = status;
     }

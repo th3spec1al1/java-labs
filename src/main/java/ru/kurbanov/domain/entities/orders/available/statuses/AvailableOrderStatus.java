@@ -4,6 +4,8 @@ import ru.kurbanov.domain.entities.orders.available.AvailableOrder;
 
 public interface AvailableOrderStatus {
 
+    String getOrderStatus();
+
     boolean tryCreate(AvailableOrder order);
     boolean tryAgreedByManager(AvailableOrder order);
     boolean tryAwaitPay(AvailableOrder order);

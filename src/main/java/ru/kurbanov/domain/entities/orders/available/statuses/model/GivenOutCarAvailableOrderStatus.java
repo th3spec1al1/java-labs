@@ -6,6 +6,9 @@ import ru.kurbanov.domain.entities.orders.available.statuses.AvailableOrderStatu
 public class GivenOutCarAvailableOrderStatus implements AvailableOrderStatus {
 
     @Override
+    public String getOrderStatus() { return "given out"; }
+
+    @Override
     public boolean tryCreate(AvailableOrder order) {
         return false;
     }
