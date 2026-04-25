@@ -1,4 +1,4 @@
-package ru.kurbanov.persistence.inmemory;
+package ru.kurbanov.infrastructure.persistence.inmemory;
 
 import ru.kurbanov.domain.entities.testdrives.TestDrive;
 import ru.kurbanov.repository.TestDriveRepository;

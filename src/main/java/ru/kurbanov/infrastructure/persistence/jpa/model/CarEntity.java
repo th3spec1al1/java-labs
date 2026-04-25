@@ -1,4 +1,4 @@
-package ru.kurbanov.persistence.jpa.model;
+package ru.kurbanov.infrastructure.persistence.jpa.model;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Setter;
 import ru.kurbanov.domain.entities.cars.enums.CarDrive;
 import ru.kurbanov.domain.entities.cars.enums.FuelType;
 import ru.kurbanov.domain.entities.cars.enums.GearboxType;
-import ru.kurbanov.persistence.jpa.listeners.BaseEntityListener;
+import ru.kurbanov.infrastructure.persistence.jpa.listeners.BaseEntityListener;
 
 import java.math.BigDecimal;
 import java.util.UUID;

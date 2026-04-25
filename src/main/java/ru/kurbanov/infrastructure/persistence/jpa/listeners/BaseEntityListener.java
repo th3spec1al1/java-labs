@@ -1,8 +1,8 @@
-package ru.kurbanov.persistence.jpa.listeners;
+package ru.kurbanov.infrastructure.persistence.jpa.listeners;
 
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import ru.kurbanov.persistence.jpa.model.BaseEntity;
+import ru.kurbanov.infrastructure.persistence.jpa.model.BaseEntity;
 
 import java.time.Instant;
 

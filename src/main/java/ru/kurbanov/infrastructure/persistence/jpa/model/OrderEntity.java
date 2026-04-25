@@ -1,4 +1,4 @@
-package ru.kurbanov.persistence.jpa.model;
+package ru.kurbanov.infrastructure.persistence.jpa.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -6,7 +6,7 @@ import jakarta.persistence.EntityListeners;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import ru.kurbanov.persistence.jpa.listeners.BaseEntityListener;
+import ru.kurbanov.infrastructure.persistence.jpa.listeners.BaseEntityListener;
 
 import java.util.UUID;
 

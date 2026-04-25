@@ -22,10 +22,10 @@ import ru.kurbanov.repository.AvailableOrderRepository;
 import ru.kurbanov.repository.CarRepository;
 import ru.kurbanov.repository.CustomOrderRepository;
 import ru.kurbanov.repository.TestDriveRepository;
-import ru.kurbanov.persistence.inmemory.InMemoryAvailableOrderRepository;
-import ru.kurbanov.persistence.inmemory.InMemoryCarRepository;
-import ru.kurbanov.persistence.inmemory.InMemoryCustomOrderRepository;
-import ru.kurbanov.persistence.inmemory.InMemoryTestDriveRepository;
+import ru.kurbanov.infrastructure.persistence.inmemory.InMemoryAvailableOrderRepository;
+import ru.kurbanov.infrastructure.persistence.inmemory.InMemoryCarRepository;
+import ru.kurbanov.infrastructure.persistence.inmemory.InMemoryCustomOrderRepository;
+import ru.kurbanov.infrastructure.persistence.inmemory.InMemoryTestDriveRepository;
 
 import java.math.BigDecimal;
 import java.util.Collection;

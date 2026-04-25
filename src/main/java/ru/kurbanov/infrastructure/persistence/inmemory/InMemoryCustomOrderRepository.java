@@ -1,4 +1,4 @@
-package ru.kurbanov.persistence.inmemory;
+package ru.kurbanov.infrastructure.persistence.inmemory;
 
 import ru.kurbanov.domain.entities.orders.custom.CustomOrder;
 import ru.kurbanov.repository.CustomOrderRepository;
