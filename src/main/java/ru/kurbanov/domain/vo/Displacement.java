@@ -1,6 +1,6 @@
 package ru.kurbanov.domain.vo;
 
-public record Displacement(long value) {
+public record Displacement(int value) {
 
     public Displacement {
         if (value < 0) {
