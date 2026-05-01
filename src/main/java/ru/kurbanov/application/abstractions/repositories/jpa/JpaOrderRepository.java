@@ -6,5 +6,5 @@ import ru.kurbanov.infrastructure.persistence.jpa.model.OrderEntity;
 
 import java.util.UUID;
 
-public interface OrderRepository extends JpaRepository<OrderEntity, UUID>, JpaSpecificationExecutor<OrderEntity> {
+public interface JpaOrderRepository extends JpaRepository<OrderEntity, UUID>, JpaSpecificationExecutor<OrderEntity> {
 }

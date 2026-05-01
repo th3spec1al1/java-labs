@@ -5,5 +5,5 @@ import ru.kurbanov.infrastructure.persistence.jpa.model.TestDriveEntity;
 
 import java.util.UUID;
 
-public interface TestDriveRepository extends JpaRepository<TestDriveEntity, UUID> {
+public interface JpaTestDriveRepository extends JpaRepository<TestDriveEntity, UUID> {
 }

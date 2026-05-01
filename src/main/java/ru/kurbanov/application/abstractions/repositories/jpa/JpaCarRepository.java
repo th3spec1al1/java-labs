@@ -6,5 +6,5 @@ import ru.kurbanov.infrastructure.persistence.jpa.model.CarEntity;
 
 import java.util.UUID;
 
-public interface CarRepository extends JpaRepository<CarEntity, UUID>, JpaSpecificationExecutor<CarEntity> {
+public interface JpaCarRepository extends JpaRepository<CarEntity, UUID>, JpaSpecificationExecutor<CarEntity> {
 }
