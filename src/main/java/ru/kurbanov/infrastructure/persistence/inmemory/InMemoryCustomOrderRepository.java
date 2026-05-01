@@ -1,7 +1,7 @@
 package ru.kurbanov.infrastructure.persistence.inmemory;
 
 import ru.kurbanov.domain.entities.orders.custom.CustomOrder;
-import ru.kurbanov.repository.CustomOrderRepository;
+import ru.kurbanov.application.abstractions.repositories.inmemory.CustomOrderRepository;
 
 import java.util.Collection;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package ru.kurbanov.repository;
+package ru.kurbanov.application.abstractions.repositories.inmemory;
 
 import ru.kurbanov.domain.entities.testdrives.TestDrive;
 

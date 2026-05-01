@@ -1,7 +1,7 @@
 package ru.kurbanov.infrastructure.persistence.inmemory;
 
 import ru.kurbanov.domain.entities.cars.Car;
-import ru.kurbanov.repository.CarRepository;
+import ru.kurbanov.application.abstractions.repositories.inmemory.CarRepository;
 
 import java.util.Collection;
 import java.util.HashMap;

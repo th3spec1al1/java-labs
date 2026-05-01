@@ -1,12 +1,12 @@
 package ru.kurbanov.domain.services;
 
 import lombok.AllArgsConstructor;
+import ru.kurbanov.application.abstractions.repositories.inmemory.*;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.testdrives.TestDrive;
 import ru.kurbanov.domain.entities.details.Detail;
 import ru.kurbanov.domain.entities.orders.available.AvailableOrder;
 import ru.kurbanov.domain.entities.orders.custom.CustomOrder;
-import ru.kurbanov.repository.*;
 
 import java.util.UUID;
 

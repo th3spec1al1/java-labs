@@ -1,7 +1,7 @@
 package ru.kurbanov.infrastructure.persistence.inmemory;
 
 import ru.kurbanov.domain.entities.testdrives.TestDrive;
-import ru.kurbanov.repository.TestDriveRepository;
+import ru.kurbanov.application.abstractions.repositories.inmemory.TestDriveRepository;
 
 import java.util.Collection;
 import java.util.HashMap;

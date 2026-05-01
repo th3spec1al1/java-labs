@@ -1,7 +1,7 @@
 package ru.kurbanov.infrastructure.persistence.inmemory;
 
 import ru.kurbanov.domain.entities.details.Detail;
-import ru.kurbanov.repository.DetailRepository;
+import ru.kurbanov.application.abstractions.repositories.inmemory.DetailRepository;
 
 import java.util.Collection;
 import java.util.HashMap;
