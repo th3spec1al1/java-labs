@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Wheels extends Detail {
 
-    public Wheels(String name, String brand, BigDecimal price, List<String> models) {
-        super(name, brand, price, models);
+    public Wheels(String name, BigDecimal price, List<String> models) {
+        super(name, price, models);
     }
 
     @Override

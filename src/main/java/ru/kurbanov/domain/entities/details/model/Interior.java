@@ -7,8 +7,8 @@ import java.util.List;
 
 public class Interior extends Detail {
 
-    public Interior(String name, String brand, BigDecimal price, List<String> models) {
-        super(name, brand, price, models);
+    public Interior(String name, BigDecimal price, List<String> models) {
+        super(name, price, models);
     }
 
     @Override

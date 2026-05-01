@@ -7,9 +7,9 @@ import java.util.List;
 
 public class SteeringWheel extends Detail {
 
-    public SteeringWheel(String name, String brand, BigDecimal price,
+    public SteeringWheel(String name, BigDecimal price,
                          List<String> models) {
-        super(name, brand, price, models);
+        super(name, price, models);
     }
 
     @Override

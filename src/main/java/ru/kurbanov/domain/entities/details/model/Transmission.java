@@ -7,9 +7,9 @@ import java.util.List;
 
 public class Transmission extends Detail {
 
-    public Transmission(String name, String brand, BigDecimal price,
+    public Transmission(String name, BigDecimal price,
                         List<String> models) {
-        super(name, brand, price, models);
+        super(name, price, models);
     }
 
     @Override

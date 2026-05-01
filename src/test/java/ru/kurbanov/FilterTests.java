@@ -48,13 +48,13 @@ public class FilterTests {
         Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
+        Detail transmission = new TransmissionFactory().create("8AT",
                 BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
                 BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
                 BigDecimal.ZERO, List.of("BMW 320i"));
-        Detail interior = new InteriorFactory().create("Dakota", "BMW",
+        Detail interior = new InteriorFactory().create("Dakota",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
         CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
@@ -106,13 +106,13 @@ public class FilterTests {
         BigDecimal price1 = new BigDecimal(4_500_000);
         BigDecimal price2 = new BigDecimal(4_900_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
+        Detail transmission = new TransmissionFactory().create("8AT",
                 BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
                 BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
                 BigDecimal.ZERO, List.of("BMW 320i"));
-        Detail interior = new InteriorFactory().create("Dakota", "BMW",
+        Detail interior = new InteriorFactory().create("Dakota",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
         CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
@@ -181,13 +181,13 @@ public class FilterTests {
         Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
+        Detail transmission = new TransmissionFactory().create("8AT",
                 BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
                 BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
                 BigDecimal.ZERO, List.of("BMW 320i"));
-        Detail interior = new InteriorFactory().create("Dakota", "BMW",
+        Detail interior = new InteriorFactory().create("Dakota",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
         CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
@@ -235,13 +235,13 @@ public class FilterTests {
         Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
+        Detail transmission = new TransmissionFactory().create("8AT",
                 BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
                 BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
                 BigDecimal.ZERO, List.of("BMW 320i"));
-        Detail interior = new InteriorFactory().create("Dakota", "BMW",
+        Detail interior = new InteriorFactory().create("Dakota",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
         CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,

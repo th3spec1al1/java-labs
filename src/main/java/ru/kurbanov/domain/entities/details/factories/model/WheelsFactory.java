@@ -10,7 +10,7 @@ import java.util.List;
 public class WheelsFactory implements DetailFactory {
 
     @Override
-    public Detail create(String name, String brand, BigDecimal price, List<String> models) {
-        return new Wheels(name, brand, price, models);
+    public Detail create(String name, BigDecimal price, List<String> models) {
+        return new Wheels(name, price, models);
     }
 }
