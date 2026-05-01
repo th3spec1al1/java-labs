@@ -13,7 +13,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@EntityListeners(BaseEntityListener.class)
 @Table(name = "orders")
 public class OrderEntity extends BaseEntity {
 

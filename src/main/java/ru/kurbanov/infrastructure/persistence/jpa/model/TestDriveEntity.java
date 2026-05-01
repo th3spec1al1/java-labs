@@ -14,7 +14,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@EntityListeners(BaseEntityListener.class)
 @Table(name = "test_drives")
 public class TestDriveEntity extends BaseEntity {
 

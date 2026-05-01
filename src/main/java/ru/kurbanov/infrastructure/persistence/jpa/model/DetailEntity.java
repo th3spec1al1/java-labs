@@ -16,7 +16,6 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@EntityListeners(BaseEntityListener.class)
 @Table(name = "details")
 public class DetailEntity extends BaseEntity {
 
