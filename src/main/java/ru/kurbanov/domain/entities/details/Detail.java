@@ -22,5 +22,12 @@ public abstract class Detail {
         this.compatibleModels = models;
     }
 
+    protected Detail(UUID id, String name, BigDecimal price, List<String> models) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.compatibleModels = models;
+    }
+
     public abstract String getType();
 }
