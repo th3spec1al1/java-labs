@@ -22,6 +22,13 @@ public abstract class Order {
         this.car = car;
     }
 
+    public Order(UUID id, Customer customer, CarDealershipManager manager, Car car) {
+        this.id = id;
+        this.customer = customer;
+        this.manager = manager;
+        this.car = car;
+    }
+
     public abstract String getOrderStatus();
 
     public abstract String getOrderType();

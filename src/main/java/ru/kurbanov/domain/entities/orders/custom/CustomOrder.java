@@ -7,6 +7,8 @@ import ru.kurbanov.domain.entities.orders.custom.statuses.CustomOrderStatus;
 import ru.kurbanov.domain.entities.users.CarDealershipManager;
 import ru.kurbanov.domain.entities.users.Customer;
 
+import java.util.UUID;
+
 public class CustomOrder extends Order {
 
     @Getter
@@ -14,6 +16,11 @@ public class CustomOrder extends Order {
 
     public CustomOrder(CustomOrderStatus status, Customer customer, CarDealershipManager manager, Car car) {
         super(customer, manager, car);
+        this.status = status;
+    }
+
+    public CustomOrder(UUID id, CustomOrderStatus status, Customer customer, CarDealershipManager manager, Car car) {
+        super(id, customer, manager, car);
         this.status = status;
     }
 

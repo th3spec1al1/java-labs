@@ -41,6 +41,20 @@ public class Car {
         this.basePrice = basePrice;
     }
 
+    public Car(UUID id, String brand, String model, Engine engine, Body body, CarDrive carDrive,
+               GearboxType gearboxType, Map<String, Detail> details, String color, BigDecimal basePrice) {
+        this.id = id;
+        this.brand = brand;
+        this.model = model;
+        this.engine = engine;
+        this.body = body;
+        this.carDrive = carDrive;
+        this.gearboxType = gearboxType;
+        this.details = details;
+        this.color = color;
+        this.basePrice = basePrice;
+    }
+
     public BigDecimal getFinalPrice() {
         BigDecimal finalPrice = basePrice;
 
