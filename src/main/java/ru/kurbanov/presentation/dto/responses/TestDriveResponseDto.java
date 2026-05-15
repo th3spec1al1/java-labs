@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Data
 @AllArgsConstructor
-public class TestDriveResponse {
+public class TestDriveResponseDto {
 
     private UUID id;
     private UUID customerId;

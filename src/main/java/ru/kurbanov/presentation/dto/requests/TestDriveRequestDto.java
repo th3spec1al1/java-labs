@@ -7,7 +7,7 @@ import java.time.ZonedDateTime;
 import java.util.UUID;
 
 @Data
-public class TestDriveRequest {
+public class TestDriveRequestDto {
 
     @NotNull
     private UUID customerId;
