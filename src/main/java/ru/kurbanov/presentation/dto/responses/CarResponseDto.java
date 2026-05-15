@@ -10,6 +10,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class CarResponseDto {
 
+    private UUID id;
     private String brand;
     private String model;
     private String fuelType;
