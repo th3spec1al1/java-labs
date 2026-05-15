@@ -1,0 +1,77 @@
+package ru.kurbanov.infrastructure.persistence.mappers;
+
+import org.springframework.stereotype.Component;
+import ru.kurbanov.domain.entities.bodies.Body;
+import ru.kurbanov.domain.entities.bodies.model.Coupe;
+import ru.kurbanov.domain.entities.bodies.model.Sedan;
+import ru.kurbanov.domain.entities.bodies.model.StationWagon;
+import ru.kurbanov.domain.entities.cars.Car;
+import ru.kurbanov.domain.entities.details.Detail;
+import ru.kurbanov.domain.entities.engines.Engine;
+import ru.kurbanov.domain.vo.Displacement;
+import ru.kurbanov.domain.vo.Power;
+import ru.kurbanov.infrastructure.persistence.jpa.model.CarEntity;
+
+import java.util.Map;
+
+@Component
+public class CarEntityMapper {
+
+    public Car toDomain(CarEntity carEntity, Map<String, Detail> details) {
+        if (carEntity == null) return null;
+
+        Engine engine = new Engine(
+                new Power(carEntity.getEnginePower()),
+                new Displacement(carEntity.getEngineDisplacement()),
+                carEntity.getFuelType());
+
+        Body body = switch (carEntity.getCarBody().toUpperCase()) {
+            case "SEDAN" -> new Sedan();
+            case "COUPE" -> new Coupe();
+            case "STATION WAGON" -> new StationWagon();
+            default -> throw new IllegalArgumentException("Unknown body type: " + carEntity.getCarBody());
+        };
+
+        return new Car(
+                carEntity.getId(),
+                carEntity.getBrand(),
+                carEntity.getModel(),
+                engine,
+                body,
+                carEntity.getCarDrive(),
+                carEntity.getGearboxType(),
+                details,
+                carEntity.getColor(),
+                carEntity.getPrice()
+        );
+    }
+
+    public CarEntity toEntity(Car car) {
+        if (car == null) return null;
+
+        CarEntity carEntity = new CarEntity();
+        
+        carEntity.setId(car.getId());
+        carEntity.setBrand(car.getBrand());
+        carEntity.setModel(car.getModel());
+
+        Engine engine = car.getEngine();
+        carEntity.setEnginePower(engine.power().value());
+        carEntity.setEngineDisplacement(engine.displacement().value());
+        carEntity.setFuelType(engine.fuelType());
+
+        carEntity.setCarBody(car.getBody().getType());
+        carEntity.setCarDrive(car.getCarDrive());
+        carEntity.setGearboxType(car.getGearboxType());
+
+        Map<String, Detail> details = car.getDetails();
+        carEntity.setWheelsId(details.get("Wheels").getId());
+        carEntity.setTransmissionId(details.get("Transmission").getId());
+        carEntity.setSteeringWheelId(details.get("SteeringWheel").getId());
+        carEntity.setInteriorId(details.get("Interior").getId());
+
+        carEntity.setColor(car.getColor());
+        carEntity.setPrice(car.getBasePrice());
+        return carEntity;
+    }
+}
