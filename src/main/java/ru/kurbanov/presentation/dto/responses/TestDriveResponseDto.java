@@ -12,6 +12,6 @@ public class TestDriveResponseDto {
 
     private UUID id;
     private UUID customerId;
-    private UUID orderedCar;
+    private UUID orderedCarId;
     private ZonedDateTime startDate;
 }

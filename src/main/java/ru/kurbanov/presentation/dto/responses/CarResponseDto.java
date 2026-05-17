@@ -18,11 +18,11 @@ public class CarResponseDto {
     private String carDrive;
     private String gearboxType;
     private String color;
-    private BigDecimal maxPrice;
-    private int minPower;
-    private int minDisplacement;
+    private int enginePower;
+    private int engineDisplacement;
+    private BigDecimal price;
     private UUID interiorId;
-    private UUID steeringWheel;
+    private UUID steeringWheelId;
     private UUID transmissionId;
     private UUID wheelsId;
 }

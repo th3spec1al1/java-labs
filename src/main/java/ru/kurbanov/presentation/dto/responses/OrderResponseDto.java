@@ -12,7 +12,7 @@ public class OrderResponseDto {
     private UUID id;
     private String orderType;
     private String orderStatus;
-    private UUID orderedCar;
+    private UUID orderedCarId;
     private UUID customerId;
     private UUID managerId;
 }
