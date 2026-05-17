@@ -8,15 +8,8 @@ import java.util.UUID;
 @Data
 public class CarConfigureRequestDto {
 
-    @NotNull
     private UUID interiorId;
-
-    @NotNull
     private UUID steeringWheelId;
-
-    @NotNull
     private UUID transmissionId;
-
-    @NotNull
     private UUID wheelsId;
 }

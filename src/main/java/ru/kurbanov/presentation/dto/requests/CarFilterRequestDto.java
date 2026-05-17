@@ -19,7 +19,7 @@ public class CarFilterRequestDto {
     private Integer minPower;
     private Integer minDisplacement;
     private UUID interiorId;
-    private UUID steeringWheel;
+    private UUID steeringWheelId;
     private UUID transmissionId;
     private UUID wheelsId;
 }

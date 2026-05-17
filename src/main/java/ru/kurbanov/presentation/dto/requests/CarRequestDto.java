@@ -31,13 +31,13 @@ public class CarRequestDto {
     private String color;
 
     @NotNull
-    private BigDecimal maxPrice;
+    private int enginePower;
 
     @NotNull
-    private int minPower;
+    private int engineDisplacement;
 
     @NotNull
-    private int minDisplacement;
+    private BigDecimal price;
 
     @NotNull
     private UUID interiorId;

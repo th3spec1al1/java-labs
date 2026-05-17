@@ -13,7 +13,7 @@ public class TestDriveRequestDto {
     private UUID customerId;
 
     @NotNull
-    private UUID orderedCar;
+    private UUID orderedCarId;
 
     @NotNull
     private ZonedDateTime startDate;
