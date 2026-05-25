@@ -2,10 +2,9 @@ package ru.kurbanov;
 
 import org.junit.jupiter.api.Test;
 import ru.kurbanov.domain.entities.cars.CarBuilder;
-import ru.kurbanov.domain.entities.bodies.Body;
-import ru.kurbanov.domain.entities.bodies.model.Sedan;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.cars.CarFilter;
+import ru.kurbanov.domain.entities.cars.enums.BodyType;
 import ru.kurbanov.domain.entities.cars.enums.CarDrive;
 import ru.kurbanov.domain.entities.cars.enums.GearboxType;
 import ru.kurbanov.domain.entities.details.Detail;
@@ -45,7 +44,6 @@ public class FilterTests {
         TestDriveRepository testDriveRepository = new InMemoryTestDriveRepository();
 
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
         Detail transmission = new TransmissionFactory().create("8AT",
@@ -57,9 +55,9 @@ public class FilterTests {
         Detail interior = new InteriorFactory().create("Dakota",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                 CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                 CarDrive.FRONT, GearboxType.AUTOMATIC,"Black", price);
 
         Car car1 = carBuilder1
@@ -82,7 +80,7 @@ public class FilterTests {
                 customOrderRepository, testDriveRepository);
 
         // Act
-        CarFilter carFilter1 = new CarFilter().withBody(new Sedan());
+        CarFilter carFilter1 = new CarFilter().withBody(BodyType.SEDAN);
         CarFilter carFilter2 = new CarFilter().withColor("Black");
         Collection<Car> filteredCars1 = customerService.searchByFilters(carFilter1);
         Collection<Car> filteredCars2 = customerService.searchByFilters(carFilter2);
@@ -102,7 +100,6 @@ public class FilterTests {
         TestDriveRepository testDriveRepository = new InMemoryTestDriveRepository();
 
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price1 = new BigDecimal(4_500_000);
         BigDecimal price2 = new BigDecimal(4_900_000);
 
@@ -115,13 +112,13 @@ public class FilterTests {
         Detail interior = new InteriorFactory().create("Dakota",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                 CarDrive.FRONT, GearboxType.AUTOMATIC,"Gray", price1);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                 CarDrive.FRONT, GearboxType.AUTOMATIC,"Black", price1);
-        CarBuilder carBuilder3 = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder3 = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                 CarDrive.FRONT, GearboxType.AUTOMATIC,"Gray", price2);
-        CarBuilder carBuilder4 = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder4 = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                 CarDrive.FRONT, GearboxType.AUTOMATIC,"Gray", price1);
 
         Car car1 = carBuilder1
@@ -178,7 +175,6 @@ public class FilterTests {
         TestDriveRepository testDriveRepository = new InMemoryTestDriveRepository();
 
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
         Detail transmission = new TransmissionFactory().create("8AT",
@@ -190,9 +186,9 @@ public class FilterTests {
         Detail interior = new InteriorFactory().create("Dakota",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                 CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                 CarDrive.FRONT, GearboxType.AUTOMATIC,"Black", price);
 
         Car car1 = carBuilder1
@@ -232,7 +228,6 @@ public class FilterTests {
         TestDriveRepository testDriveRepository = new InMemoryTestDriveRepository();
 
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
         Detail transmission = new TransmissionFactory().create("8AT",
@@ -244,9 +239,9 @@ public class FilterTests {
         Detail interior = new InteriorFactory().create("Dakota",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                 CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                 CarDrive.FRONT, GearboxType.AUTOMATIC,"Black", price);
 
         Car car1 = carBuilder1

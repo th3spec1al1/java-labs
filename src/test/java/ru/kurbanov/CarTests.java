@@ -2,9 +2,8 @@ package ru.kurbanov;
 
 import org.junit.jupiter.api.Test;
 import ru.kurbanov.domain.entities.cars.CarBuilder;
-import ru.kurbanov.domain.entities.bodies.Body;
-import ru.kurbanov.domain.entities.bodies.model.Sedan;
 import ru.kurbanov.domain.entities.cars.Car;
+import ru.kurbanov.domain.entities.cars.enums.BodyType;
 import ru.kurbanov.domain.entities.cars.enums.CarDrive;
 import ru.kurbanov.domain.entities.cars.enums.GearboxType;
 import ru.kurbanov.domain.entities.details.Detail;
@@ -31,7 +30,6 @@ public class CarTests {
 
         // Arrange
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
         Detail transmission = new TransmissionFactory().create("8AT",
@@ -43,7 +41,7 @@ public class CarTests {
         Detail interior = new InteriorFactory().create("Dakota",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                                                 CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
@@ -73,7 +71,6 @@ public class CarTests {
 
         // Arrange
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
         Detail transmission = new TransmissionFactory().create("8AT",
@@ -83,7 +80,7 @@ public class CarTests {
         Detail wheels = new WheelsFactory().create("17’’ Standard",
                 BigDecimal.ZERO, List.of("BMW 320i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                                                 CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
@@ -101,7 +98,6 @@ public class CarTests {
 
         // Arrange
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
         Detail transmission = new TransmissionFactory().create("8AT",
@@ -113,7 +109,7 @@ public class CarTests {
         Detail interior = new InteriorFactory().create("Performance",
                 new BigDecimal(110_000), List.of("BMW 330i", "BMW 340i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body,
+        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
                                                 CarDrive.FRONT, GearboxType.AUTOMATIC, "White", price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)

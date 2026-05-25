@@ -20,7 +20,7 @@ public class CarResponseDto {
     private String color;
     private int enginePower;
     private int engineDisplacement;
-    private BigDecimal price;
+    private BigDecimal basePrice;
     private UUID interiorId;
     private UUID steeringWheelId;
     private UUID transmissionId;

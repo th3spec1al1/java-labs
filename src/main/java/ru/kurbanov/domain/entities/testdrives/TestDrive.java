@@ -21,4 +21,11 @@ public class TestDrive {
         this.car = car;
         this.date = date;
     }
+
+    public TestDrive(UUID id, Customer customer, Car car, ZonedDateTime date) {
+        this.id = id;
+        this.customer = customer;
+        this.car = car;
+        this.date = date;
+    }
 }
