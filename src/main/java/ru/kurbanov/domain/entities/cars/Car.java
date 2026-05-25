@@ -1,7 +1,7 @@
 package ru.kurbanov.domain.entities.cars;
 
 import lombok.Getter;
-import ru.kurbanov.domain.entities.bodies.Body;
+import ru.kurbanov.domain.entities.cars.enums.BodyType;
 import ru.kurbanov.domain.entities.cars.enums.CarDrive;
 import ru.kurbanov.domain.entities.cars.enums.GearboxType;
 import ru.kurbanov.domain.entities.details.Detail;
@@ -19,7 +19,7 @@ public class Car {
     private final String model;
 
     private final Engine engine;
-    private final Body body;
+    private final BodyType body;
     private final CarDrive carDrive;
     private final GearboxType gearboxType;
     private final Map<String, Detail> details;
@@ -27,7 +27,7 @@ public class Car {
 
     private final BigDecimal basePrice;
 
-    public Car(String brand, String model, Engine engine, Body body, CarDrive carDrive,
+    public Car(String brand, String model, Engine engine, BodyType body, CarDrive carDrive,
                GearboxType gearboxType, Map<String, Detail> details, String color, BigDecimal basePrice) {
         this.id = UUID.randomUUID();
         this.brand = brand;
@@ -41,7 +41,7 @@ public class Car {
         this.basePrice = basePrice;
     }
 
-    public Car(UUID id, String brand, String model, Engine engine, Body body, CarDrive carDrive,
+    public Car(UUID id, String brand, String model, Engine engine, BodyType body, CarDrive carDrive,
                GearboxType gearboxType, Map<String, Detail> details, String color, BigDecimal basePrice) {
         this.id = id;
         this.brand = brand;

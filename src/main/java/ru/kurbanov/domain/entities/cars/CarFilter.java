@@ -1,7 +1,7 @@
 package ru.kurbanov.domain.entities.cars;
 
 import lombok.Getter;
-import ru.kurbanov.domain.entities.bodies.Body;
+import ru.kurbanov.domain.entities.cars.enums.BodyType;
 import ru.kurbanov.domain.entities.restrictions.CarRestriction;
 import ru.kurbanov.domain.entities.restrictions.model.*;
 import ru.kurbanov.domain.entities.cars.enums.FuelType;
@@ -31,7 +31,7 @@ public class CarFilter {
         return this;
     }
 
-    public CarFilter withBody(Body body) {
+    public CarFilter withBody(BodyType body) {
         restriction = new UnitedRestrictions(restriction, new BodyRestriction(body));
         return this;
     }

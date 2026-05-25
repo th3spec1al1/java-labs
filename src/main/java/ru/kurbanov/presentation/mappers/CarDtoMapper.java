@@ -14,7 +14,7 @@ public interface CarDtoMapper {
     @Mapping(target = "enginePower", expression = "java(car.getEngine().power().value())")
     @Mapping(target = "engineDisplacement", expression = "java(car.getEngine().displacement().value())")
     @Mapping(target = "fuelType", expression = "java(car.getEngine().fuelType().name())")
-    @Mapping(target = "carBody", expression = "java(car.getBody().getType())")
+    @Mapping(target = "carBody", source = "body")
     @Mapping(target = "wheelsId", expression = "java(car.getDetails().get(\"Wheels\").getId())")
     @Mapping(target = "transmissionId", expression = "java(car.getDetails().get(\"Transmission\").getId())")
     @Mapping(target = "steeringWheelId", expression = "java(car.getDetails().get(\"SteeringWheel\").getId())")

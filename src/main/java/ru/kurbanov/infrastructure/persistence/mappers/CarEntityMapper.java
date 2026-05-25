@@ -1,10 +1,6 @@
 package ru.kurbanov.infrastructure.persistence.mappers;
 
 import org.springframework.stereotype.Component;
-import ru.kurbanov.domain.entities.bodies.Body;
-import ru.kurbanov.domain.entities.bodies.model.Coupe;
-import ru.kurbanov.domain.entities.bodies.model.Sedan;
-import ru.kurbanov.domain.entities.bodies.model.StationWagon;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.details.Detail;
 import ru.kurbanov.domain.entities.engines.Engine;
@@ -25,19 +21,12 @@ public class CarEntityMapper {
                 new Displacement(carEntity.getEngineDisplacement()),
                 carEntity.getFuelType());
 
-        Body body = switch (carEntity.getCarBody().toUpperCase()) {
-            case "SEDAN" -> new Sedan();
-            case "COUPE" -> new Coupe();
-            case "STATION WAGON" -> new StationWagon();
-            default -> throw new IllegalArgumentException("Unknown body type: " + carEntity.getCarBody());
-        };
-
         return new Car(
                 carEntity.getId(),
                 carEntity.getBrand(),
                 carEntity.getModel(),
                 engine,
-                body,
+                carEntity.getCarBody(),
                 carEntity.getCarDrive(),
                 carEntity.getGearboxType(),
                 details,
@@ -60,7 +49,7 @@ public class CarEntityMapper {
         carEntity.setEngineDisplacement(engine.displacement().value());
         carEntity.setFuelType(engine.fuelType());
 
-        carEntity.setCarBody(car.getBody().getType());
+        carEntity.setCarBody(car.getBody());
         carEntity.setCarDrive(car.getCarDrive());
         carEntity.setGearboxType(car.getGearboxType());
 

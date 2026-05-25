@@ -3,6 +3,7 @@ package ru.kurbanov.infrastructure.persistence.jpa.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import ru.kurbanov.domain.entities.cars.enums.BodyType;
 import ru.kurbanov.domain.entities.cars.enums.CarDrive;
 import ru.kurbanov.domain.entities.cars.enums.FuelType;
 import ru.kurbanov.domain.entities.cars.enums.GearboxType;
@@ -33,8 +34,9 @@ public class CarEntity extends BaseEntity {
     @Column(name = "fuel_type", nullable = false)
     private FuelType fuelType;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "car_body", nullable = false)
-    private String carBody;
+    private BodyType carBody;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "car_drive", nullable = false)
