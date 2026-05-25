@@ -41,8 +41,16 @@ public class CarTests {
         Detail interior = new InteriorFactory().create("Dakota",
                 new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
-                                                CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price)
+        CarBuilder carBuilder = CarBuilder
+                .create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("White")
+                .basePrice(price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
                 .withSelectedDetail(wheels)
@@ -80,8 +88,15 @@ public class CarTests {
         Detail wheels = new WheelsFactory().create("17’’ Standard",
                 BigDecimal.ZERO, List.of("BMW 320i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
-                                                CarDrive.FRONT, GearboxType.AUTOMATIC,"White", price)
+        CarBuilder carBuilder = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("White")
+                .basePrice(price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
                 .withSelectedDetail(wheels);
@@ -109,8 +124,15 @@ public class CarTests {
         Detail interior = new InteriorFactory().create("Performance",
                 new BigDecimal(110_000), List.of("BMW 330i", "BMW 340i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, BodyType.SEDAN,
-                                                CarDrive.FRONT, GearboxType.AUTOMATIC, "White", price)
+        CarBuilder carBuilder = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("White")
+                .basePrice(price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
                 .withSelectedDetail(wheels);

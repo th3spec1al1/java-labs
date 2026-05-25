@@ -1,7 +1,7 @@
 package ru.kurbanov.domain.entities.cars;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 import ru.kurbanov.domain.entities.cars.enums.BodyType;
 import ru.kurbanov.domain.entities.cars.enums.CarDrive;
 import ru.kurbanov.domain.entities.cars.enums.GearboxType;
@@ -15,32 +15,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Getter
+@Setter
 public class CarBuilder {
 
-    private final String brand;
-    private final String model;
-    private final Engine engine;
-    private final BodyType body;
-    private final CarDrive carDrive;
-    private final GearboxType gearboxType;
+    private String brand;
+    private String model;
+    private Engine engine;
+    private BodyType body;
+    private CarDrive carDrive;
+    private GearboxType gearboxType;
     private final Map<String, Detail> details = new HashMap<>();
-    private final String color;
-    private final BigDecimal basePrice;
+    private String color;
+    private BigDecimal basePrice;
 
-    @Builder
-    public CarBuilder(String brand, String model, Engine engine, BodyType body, CarDrive carDrive,
-                      GearboxType gearboxType, String color, BigDecimal basePrice) {
-        this.brand = brand;
-        this.model = model;
-        this.engine = engine;
-        this.body = body;
-        this.carDrive = carDrive;
-        this.gearboxType = gearboxType;
-        this.color = color;
-        this.basePrice = basePrice;
+    public static CarBuilder create() {
+        return new CarBuilder();
     }
 
+    public CarBuilder brand(String brand) { this.brand = brand; return this; }
+    public CarBuilder model(String model) { this.model = model; return this; }
+    public CarBuilder engine(Engine engine) { this.engine = engine; return this; }
+    public CarBuilder body(BodyType body) { this.body = body; return this; }
+    public CarBuilder carDrive(CarDrive carDrive) { this.carDrive = carDrive; return this; }
+    public CarBuilder gearboxType(GearboxType gearboxType) { this.gearboxType = gearboxType; return this; }
+    public CarBuilder color(String color) { this.color = color; return this; }
+    public CarBuilder basePrice(BigDecimal basePrice) { this.basePrice = basePrice; return this; }
+
     public CarBuilder withSelectedDetail(Detail detail) {
+        if (detail == null) return this;
         if (!detail.getCompatibleModels().contains(this.brand + " " + this.model)) {
             throw new IncompatibleComponentException("You can't suit this detail - " + detail.getName()
                     + " with this car - " + brand + " " + model);
