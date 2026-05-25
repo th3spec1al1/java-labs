@@ -2,6 +2,9 @@ package ru.kurbanov.infrastructure.persistence.specifications;
 
 import org.springframework.data.jpa.domain.Specification;
 import ru.kurbanov.domain.entities.cars.enums.BodyType;
+import ru.kurbanov.domain.entities.cars.enums.CarDrive;
+import ru.kurbanov.domain.entities.cars.enums.FuelType;
+import ru.kurbanov.domain.entities.cars.enums.GearboxType;
 import ru.kurbanov.infrastructure.persistence.jpa.model.CarEntity;
 
 import java.math.BigDecimal;
@@ -19,7 +22,7 @@ public class CarSpecifications {
                 criteriaBuilder.equal(root.get("model"), model));
     }
 
-    public static Specification<CarEntity> hasFuelType(String fuelType) {
+    public static Specification<CarEntity> hasFuelType(FuelType fuelType) {
         return ((root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("fuelType"), fuelType));
     }
@@ -29,12 +32,12 @@ public class CarSpecifications {
                 criteriaBuilder.equal(root.get("carBody"), carBody));
     }
 
-    public static Specification<CarEntity> hasCarDrive(String carDrive) {
+    public static Specification<CarEntity> hasCarDrive(CarDrive carDrive) {
         return ((root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("carDrive"), carDrive));
     }
 
-    public static Specification<CarEntity> hasGearboxType(String gearboxType) {
+    public static Specification<CarEntity> hasGearboxType(GearboxType gearboxType) {
         return ((root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("gearboxType"), gearboxType));
     }
@@ -69,8 +72,8 @@ public class CarSpecifications {
     }
 
     public static Specification<CarEntity> buildFilter(
-            String brand, String model, String fuelType,
-            BodyType carBody, String carDrive, String gearboxType, String color,
+            String brand, String model, FuelType fuelType,
+            BodyType carBody, CarDrive carDrive, GearboxType gearboxType, String color,
             BigDecimal maxPrice, Integer minPower, Integer minDisplacement,
             UUID interiorId, UUID steeringWheel, UUID transmissionId, UUID wheelsId) {
         Specification<CarEntity> spec = Specification.where(null);

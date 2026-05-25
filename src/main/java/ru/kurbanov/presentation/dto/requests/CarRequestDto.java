@@ -43,7 +43,7 @@ public class CarRequestDto {
     private UUID interiorId;
 
     @NotNull
-    private UUID steeringWheel;
+    private UUID steeringWheelId;
 
     @NotNull
     private UUID transmissionId;
