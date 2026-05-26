@@ -12,4 +12,8 @@ public class WarehouseAdmin {
     public WarehouseAdmin() {
         this.id = UUID.randomUUID();
     }
+
+    public WarehouseAdmin(UUID id) {
+        this.id = id;
+    }
 }

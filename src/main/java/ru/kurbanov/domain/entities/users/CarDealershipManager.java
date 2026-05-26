@@ -13,4 +13,8 @@ public class CarDealershipManager {
     public CarDealershipManager() {
         this.id = UUID.randomUUID();
     }
+
+    public CarDealershipManager(UUID id) {
+        this.id = id;
+    }
 }
