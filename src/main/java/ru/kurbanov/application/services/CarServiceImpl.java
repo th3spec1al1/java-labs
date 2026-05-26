@@ -44,21 +44,7 @@ public class CarServiceImpl implements CarService {
     private final CarEntityMapper carEntityMapper;
     private final DetailEntityMapper detailEntityMapper;
     private final CarDtoMapper carDtoMapper;
-
-    private Detail loadDetail(UUID detailId) {
-        return detailRepository.findById(detailId)
-                .map(detailEntityMapper::toDomain)
-                .orElseThrow(() -> new EntityNotFoundException("Detail not found: " + detailId));
-    }
-
-    private Map<String, Detail> loadDetails(CarEntity carEntity) {
-        Map<String, Detail> details = new HashMap<>();
-        details.put("WHEELS", loadDetail(carEntity.getWheelsId()));
-        details.put("TRANSMISSION", loadDetail(carEntity.getTransmissionId()));
-        details.put("STEERING_WHEEL", loadDetail(carEntity.getSteeringWheelId()));
-        details.put("INTERIOR", loadDetail(carEntity.getInteriorId()));
-        return details;
-    }
+    private final CarDetailsLoader carDetailsLoader;
 
     private Engine createEngine(CarRequestDto carRequestDto) {
         return new Engine(
@@ -73,7 +59,7 @@ public class CarServiceImpl implements CarService {
         CarEntity carEntity = carRepository.findById(carId)
                 .orElseThrow(() -> new EntityNotFoundException("Car not found: " + carId));
 
-        Map<String, Detail> details = loadDetails(carEntity);
+        Map<String, Detail> details = carDetailsLoader.loadDetails(carEntity);
         Car car = carEntityMapper.toDomain(carEntity, details);
         return carDtoMapper.toDto(car);
     }
@@ -108,7 +94,7 @@ public class CarServiceImpl implements CarService {
 
         return carRepository.findAll(specification).stream()
                 .map(entity -> {
-                        Map<String, Detail> details = loadDetails(entity);
+                    Map<String, Detail> details = carDetailsLoader.loadDetails(entity);
                         Car car = carEntityMapper.toDomain(entity, details);
                         return carDtoMapper.toDto(car);
                 })
@@ -117,10 +103,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public CarResponseDto addCar(CarRequestDto carRequestDto) {
-        Detail wheels = loadDetail(carRequestDto.getWheelsId());
-        Detail interior = loadDetail(carRequestDto.getInteriorId());
-        Detail transmission = loadDetail(carRequestDto.getTransmissionId());
-        Detail steeringWheel = loadDetail(carRequestDto.getSteeringWheelId());
+        Detail wheels = carDetailsLoader.loadDetail(carRequestDto.getWheelsId());
+        Detail interior = carDetailsLoader.loadDetail(carRequestDto.getInteriorId());
+        Detail transmission = carDetailsLoader.loadDetail(carRequestDto.getTransmissionId());
+        Detail steeringWheel = carDetailsLoader.loadDetail(carRequestDto.getSteeringWheelId());
 
         Map<String, Detail> details = Map.of(
                 "WHEELS", wheels,
@@ -169,7 +155,7 @@ public class CarServiceImpl implements CarService {
         carEntity.setInteriorId(carRequestDto.getInteriorId());
         carEntity.setPrice(carRequestDto.getPrice());
 
-        Map<String, Detail> details = loadDetails(carEntity);
+        Map<String, Detail> details = carDetailsLoader.loadDetails(carEntity);
         Car car = carEntityMapper.toDomain(carEntity, details);
         return carDtoMapper.toDto(car);
     }
@@ -184,7 +170,7 @@ public class CarServiceImpl implements CarService {
         CarEntity carEntity = carRepository.findById(carId)
                 .orElseThrow(() -> new EntityNotFoundException("Car not found: " + carId));
 
-        Map<String, Detail> details = loadDetails(carEntity);
+        Map<String, Detail> details = carDetailsLoader.loadDetails(carEntity);
         Car car = carEntityMapper.toDomain(carEntity, details);
 
         CarBuilder carBuilder = CarBuilder
@@ -199,7 +185,7 @@ public class CarServiceImpl implements CarService {
                 .basePrice(car.getBasePrice());
 
         if (carConfigureRequestDto.getWheelsId() != null) {
-            Detail detail = loadDetail(carConfigureRequestDto.getWheelsId());
+            Detail detail = carDetailsLoader.loadDetail(carConfigureRequestDto.getWheelsId());
             details.put(detail.getType(), detail);
             carBuilder.withSelectedDetail(detail);
         } else {
@@ -207,7 +193,7 @@ public class CarServiceImpl implements CarService {
         }
 
         if (carConfigureRequestDto.getWheelsId() != null) {
-            Detail detail = loadDetail(carConfigureRequestDto.getTransmissionId());
+            Detail detail = carDetailsLoader.loadDetail(carConfigureRequestDto.getTransmissionId());
             details.put(detail.getType(), detail);
             carBuilder.withSelectedDetail(detail);
         } else {
@@ -215,7 +201,7 @@ public class CarServiceImpl implements CarService {
         }
 
         if (carConfigureRequestDto.getWheelsId() != null) {
-            Detail detail = loadDetail(carConfigureRequestDto.getSteeringWheelId());
+            Detail detail = carDetailsLoader.loadDetail(carConfigureRequestDto.getSteeringWheelId());
             details.put(detail.getType(), detail);
             carBuilder.withSelectedDetail(detail);
         } else {
@@ -223,7 +209,7 @@ public class CarServiceImpl implements CarService {
         }
 
         if (carConfigureRequestDto.getWheelsId() != null) {
-            Detail detail = loadDetail(carConfigureRequestDto.getInteriorId());
+            Detail detail = carDetailsLoader.loadDetail(carConfigureRequestDto.getInteriorId());
             details.put(detail.getType(), detail);
             carBuilder.withSelectedDetail(detail);
         } else {
