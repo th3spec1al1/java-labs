@@ -64,6 +64,10 @@ public class DetailServiceImpl implements DetailService {
 
     @Override
     public void removeDetail(UUID detailId) {
+        if (!detailRepository.existsById(detailId)) {
+            throw new EntityNotFoundException("Detail not found: " + detailId);
+        }
+
         detailRepository.deleteById(detailId);
     }
 }

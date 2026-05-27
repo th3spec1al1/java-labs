@@ -88,6 +88,10 @@ public class TestDriveServiceImpl implements TestDriveService {
 
     @Override
     public void removeTestDrive(UUID testDriveId) {
+        if (!testDriveRepository.existsById(testDriveId)) {
+            throw new EntityNotFoundException("Detail not found: " + testDriveId);
+        }
+
         testDriveRepository.deleteById(testDriveId);
     }
 }

@@ -111,6 +111,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void removeOrder(UUID orderId) {
+        if (!orderRepository.existsById(orderId)) {
+            throw new EntityNotFoundException("Detail not found: " + orderId);
+        }
+
         orderRepository.deleteById(orderId);
     }
 }

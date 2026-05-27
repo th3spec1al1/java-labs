@@ -162,6 +162,10 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public void removeCar(UUID carId) {
+        if (!carRepository.existsById(carId)) {
+            throw new EntityNotFoundException("Detail not found: " + carId);
+        }
+
         carRepository.deleteById(carId);
     }
 
