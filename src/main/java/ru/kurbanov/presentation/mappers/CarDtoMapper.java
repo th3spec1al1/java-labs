@@ -21,10 +21,10 @@ public abstract class CarDtoMapper {
     @Mapping(target = "engineDisplacement", expression = "java(car.getEngine().displacement().value())")
     @Mapping(target = "fuelType", expression = "java(car.getEngine().fuelType().name())")
     @Mapping(target = "carBody", expression = "java(car.getBody().name())")
-    @Mapping(target = "wheelsId", expression = "java(car.getDetails().get(\"Wheels\").getId())")
-    @Mapping(target = "transmissionId", expression = "java(car.getDetails().get(\"Transmission\").getId())")
-    @Mapping(target = "steeringWheelId", expression = "java(car.getDetails().get(\"SteeringWheel\").getId())")
-    @Mapping(target = "interiorId", expression = "java(car.getDetails().get(\"Interior\").getId())")
+    @Mapping(target = "wheelsId", expression = "java(car.getDetails().get(\"WHEELS\").getId())")
+    @Mapping(target = "transmissionId", expression = "java(car.getDetails().get(\"TRANSMISSION\").getId())")
+    @Mapping(target = "steeringWheelId", expression = "java(car.getDetails().get(\"STEERING_WHEEL\").getId())")
+    @Mapping(target = "interiorId", expression = "java(car.getDetails().get(\"INTERIOR\").getId())")
     public abstract CarResponseDto toDto(Car car);
 
     public Car toDomain(UUID id, CarRequestDto dto,

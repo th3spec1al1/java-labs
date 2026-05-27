@@ -121,6 +121,8 @@ public class CarServiceImpl implements CarService {
                 .model(carRequestDto.getModel())
                 .engine(createEngine(carRequestDto))
                 .body(BodyType.valueOf(carRequestDto.getCarBody()))
+                .carDrive(CarDrive.valueOf(carRequestDto.getCarDrive()))
+                .gearboxType(GearboxType.valueOf(carRequestDto.getGearboxType()))
                 .color(carRequestDto.getColor())
                 .basePrice(carRequestDto.getPrice())
                 .withSelectedDetail(wheels)
@@ -196,7 +198,7 @@ public class CarServiceImpl implements CarService {
             carBuilder.withSelectedDetail(details.get("WHEELS"));
         }
 
-        if (carConfigureRequestDto.getWheelsId() != null) {
+        if (carConfigureRequestDto.getTransmissionId() != null) {
             Detail detail = carDetailsLoader.loadDetail(carConfigureRequestDto.getTransmissionId());
             details.put(detail.getType(), detail);
             carBuilder.withSelectedDetail(detail);
@@ -204,7 +206,7 @@ public class CarServiceImpl implements CarService {
             carBuilder.withSelectedDetail(details.get("TRANSMISSION"));
         }
 
-        if (carConfigureRequestDto.getWheelsId() != null) {
+        if (carConfigureRequestDto.getSteeringWheelId() != null) {
             Detail detail = carDetailsLoader.loadDetail(carConfigureRequestDto.getSteeringWheelId());
             details.put(detail.getType(), detail);
             carBuilder.withSelectedDetail(detail);
@@ -212,7 +214,7 @@ public class CarServiceImpl implements CarService {
             carBuilder.withSelectedDetail(details.get("STEERING_WHEEL"));
         }
 
-        if (carConfigureRequestDto.getWheelsId() != null) {
+        if (carConfigureRequestDto.getInteriorId() != null) {
             Detail detail = carDetailsLoader.loadDetail(carConfigureRequestDto.getInteriorId());
             details.put(detail.getType(), detail);
             carBuilder.withSelectedDetail(detail);

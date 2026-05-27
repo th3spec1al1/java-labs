@@ -19,10 +19,10 @@ public abstract class BaseEntity {
     @Column(name = "id", columnDefinition = "TIMESTAMP", nullable = false, updatable = false)
     private UUID id;
 
-    @Column(name = "created_time", columnDefinition = "TIMESTAMP", nullable = false, updatable = false)
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP", nullable = false, updatable = false)
     private Instant createdAt;
 
-    @Column(name = "updated_time", columnDefinition = "TIMESTAMP", nullable = false)
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP", nullable = false)
     private Instant updatedAt;
 
     @Column(name = "removed", columnDefinition = "TIMESTAMP", nullable = false)

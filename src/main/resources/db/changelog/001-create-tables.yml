@@ -94,7 +94,7 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: car_drive
-                  type: VARCHAR(10)
+                  type: VARCHAR(20)
                   constraints:
                     nullable: false
               - column:

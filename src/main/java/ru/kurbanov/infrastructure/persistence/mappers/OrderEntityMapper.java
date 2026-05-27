@@ -1,5 +1,6 @@
 package ru.kurbanov.infrastructure.persistence.mappers;
 
+import org.springframework.stereotype.Component;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.orders.Order;
 import ru.kurbanov.domain.entities.orders.available.AvailableOrder;
@@ -12,6 +13,7 @@ import ru.kurbanov.domain.entities.users.CarDealershipManager;
 import ru.kurbanov.domain.entities.users.Customer;
 import ru.kurbanov.infrastructure.persistence.jpa.model.OrderEntity;
 
+@Component
 public class OrderEntityMapper {
 
     public Order toDomain(OrderEntity orderEntity, Customer customer,

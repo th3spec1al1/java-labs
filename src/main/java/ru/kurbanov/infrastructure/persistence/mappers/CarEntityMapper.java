@@ -54,10 +54,10 @@ public class CarEntityMapper {
         carEntity.setGearboxType(car.getGearboxType());
 
         Map<String, Detail> details = car.getDetails();
-        carEntity.setWheelsId(details.get("Wheels").getId());
-        carEntity.setTransmissionId(details.get("Transmission").getId());
-        carEntity.setSteeringWheelId(details.get("SteeringWheel").getId());
-        carEntity.setInteriorId(details.get("Interior").getId());
+        carEntity.setWheelsId(details.get("WHEELS").getId());
+        carEntity.setTransmissionId(details.get("TRANSMISSION").getId());
+        carEntity.setSteeringWheelId(details.get("STEERING_WHEEL").getId());
+        carEntity.setInteriorId(details.get("INTERIOR").getId());
 
         carEntity.setColor(car.getColor());
         carEntity.setPrice(car.getBasePrice());

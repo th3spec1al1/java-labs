@@ -22,19 +22,19 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<ErrorResponseDto> handleEntityNotFoundException(EntityNotFoundException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(new ErrorResponseDto("Not found", e.getMessage(), LocalDateTime.now()));
     }
 
     @ExceptionHandler(DomainValidationException.class)
     public ResponseEntity<ErrorResponseDto> handleDomainValidationException(DomainValidationException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponseDto("Bad request", e.getMessage(), LocalDateTime.now()));
     }
 
     @ExceptionHandler(IncompatibleComponentException.class)
     public ResponseEntity<ErrorResponseDto> handleIncompatibleComponentException(IncompatibleComponentException e) {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponseDto("Bad request", e.getMessage(), LocalDateTime.now()));
     }
 }
