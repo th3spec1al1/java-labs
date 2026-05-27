@@ -1,4 +1,4 @@
-package org.example;
+package ru.kurbanov;
 
 import org.junit.jupiter.api.Test;
 import org.testcontainers.containers.PostgreSQLContainer;
