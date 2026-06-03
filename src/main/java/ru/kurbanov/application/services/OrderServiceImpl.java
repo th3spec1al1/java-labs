@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.kurbanov.application.abstractions.repositories.jpa.JpaCarRepository;
 import ru.kurbanov.application.abstractions.repositories.jpa.JpaOrderRepository;
 import ru.kurbanov.application.contracts.OrderService;
+import ru.kurbanov.config.SecurityUtils;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.details.Detail;
 import ru.kurbanov.domain.entities.orders.Order;
@@ -42,6 +43,7 @@ public class OrderServiceImpl implements OrderService {
     private final CarEntityMapper carEntityMapper;
     private final OrderDtoMapper orderDtoMapper;
     private final CarDetailsLoader carDetailsLoader;
+    private final SecurityUtils securityUtils;
 
     private OrderResponseDto toDto(OrderEntity orderEntity) {
         Customer customer = new Customer(orderEntity.getCustomerId());
@@ -63,6 +65,10 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderResponseDto> getOrders(OrderFilterRequestDto orderFilterRequestDto) {
+        if (securityUtils.hasRole("USER") && !securityUtils.hasRole("MANAGER") && !securityUtils.hasRole("ADMIN")) {
+            orderFilterRequestDto.setCustomerId(securityUtils.getCurrentUserId());
+        }
+
         Specification<OrderEntity> spec = OrderSpecifications.buildFilter(
                 orderFilterRequestDto.getOrderType(),
                 orderFilterRequestDto.getOrderStatus(),
@@ -77,7 +83,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponseDto addOrder(OrderRequestDto orderRequestDto) {
-        Customer customer = new Customer(orderRequestDto.getCustomerId());
+        Customer customer = new Customer(securityUtils.getCurrentUserId());
         CarDealershipManager manager = new CarDealershipManager();
         CarEntity carEntity = carRepository.findById(orderRequestDto.getOrderedCarId())
                 .orElseThrow(() -> new EntityNotFoundException("Car not found: " + orderRequestDto.getOrderedCarId()));
