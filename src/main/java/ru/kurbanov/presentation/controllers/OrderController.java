@@ -8,6 +8,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.kurbanov.application.contracts.OrderService;
 import ru.kurbanov.presentation.dto.requests.OrderFilterRequestDto;
@@ -61,12 +62,14 @@ public class OrderController {
 
     @Operation(summary = "Get a order by ID")
     @GetMapping("/{id}")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN') or (hasRole('USER') and @orderOwnerChecker.isOwner(#id))")
     public ResponseEntity<OrderResponseDto> getOrder(@PathVariable UUID id) {
         return ResponseEntity.ok(orderService.getOrder(id));
     }
 
     @Operation(summary = "Get a list of filtered orders")
     @PostMapping("/filter")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN', 'USER')")
     public ResponseEntity<List<OrderResponseDto>> getOrders(@RequestBody OrderFilterRequestDto orderFilterRequestDto) {
         return ResponseEntity.ok(orderService.getOrders(orderFilterRequestDto));
     }
@@ -81,12 +84,14 @@ public class OrderController {
             )
     )
     @PostMapping
+    @PreAuthorize("hasRole('USER')")
     public ResponseEntity<OrderResponseDto> addOrder(@RequestBody OrderRequestDto orderRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(orderService.addOrder(orderRequestDto));
     }
 
     @Operation(summary = "Update the order")
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN')")
     public ResponseEntity<OrderResponseDto> updateOrder(@PathVariable UUID id,
                                                         @RequestBody OrderRequestDto orderRequestDto) {
         return ResponseEntity.ok(orderService.updateOrder(id, orderRequestDto));
@@ -94,6 +99,7 @@ public class OrderController {
 
     @Operation(summary = "Remove order")
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('MANAGER') or hasRole('ADMIN') or (hasRole('USER') and @orderOwnerChecker.isOwner(#id))")
     public ResponseEntity<Void> removeOrder(@PathVariable UUID id) {
         orderService.removeOrder(id);
         return ResponseEntity.ok().build();
