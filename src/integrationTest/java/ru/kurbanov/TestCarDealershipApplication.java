@@ -2,12 +2,13 @@ package ru.kurbanov;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
+import ru.kurbanov.config.TestSecurityConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -15,6 +16,7 @@ import java.sql.ResultSet;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@Import(TestSecurityConfig.class)
 @EnableJpaRepositories("ru.kurbanov.application.abstractions.repositories.jpa")
 @EntityScan("ru.kurbanov.infrastructure.persistence.jpa.model")
 @Testcontainers
