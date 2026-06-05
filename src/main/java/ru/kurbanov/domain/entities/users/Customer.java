@@ -17,6 +17,11 @@ public class Customer {
         this.balance = BigDecimal.ZERO;
     }
 
+    public Customer(UUID id) {
+        this.id = id;
+        this.balance = BigDecimal.ZERO;
+    }
+
     public boolean canBookCar(Car car) {
         return (this.balance.compareTo(car.getFinalPrice()) >= 0);
     }

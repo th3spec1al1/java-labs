@@ -1,0 +1,30 @@
+package ru.kurbanov.infrastructure.persistence.jpa.model;
+
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+import ru.kurbanov.infrastructure.persistence.jpa.listeners.BaseEntityListener;
+
+import java.time.Instant;
+import java.util.UUID;
+
+@MappedSuperclass
+@Getter
+@Setter
+@EntityListeners(BaseEntityListener.class)
+public abstract class BaseEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "id", columnDefinition = "TIMESTAMP", nullable = false, updatable = false)
+    private UUID id;
+
+    @Column(name = "created_at", columnDefinition = "TIMESTAMP", nullable = false, updatable = false)
+    private Instant createdAt;
+
+    @Column(name = "updated_at", columnDefinition = "TIMESTAMP", nullable = false)
+    private Instant updatedAt;
+
+    @Column(name = "removed", columnDefinition = "TIMESTAMP", nullable = false)
+    private boolean removed = false;
+}

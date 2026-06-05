@@ -7,6 +7,8 @@ import ru.kurbanov.domain.entities.orders.available.statuses.AvailableOrderStatu
 import ru.kurbanov.domain.entities.users.CarDealershipManager;
 import ru.kurbanov.domain.entities.users.Customer;
 
+import java.util.UUID;
+
 public class AvailableOrder extends Order {
 
     @Getter
@@ -15,6 +17,21 @@ public class AvailableOrder extends Order {
     public AvailableOrder(AvailableOrderStatus status, Customer customer, CarDealershipManager manager, Car car) {
         super(customer, manager, car);
         this.status = status;
+    }
+
+    public AvailableOrder(UUID id, AvailableOrderStatus status, Customer customer, CarDealershipManager manager, Car car) {
+        super(id, customer, manager, car);
+        this.status = status;
+    }
+
+    @Override
+    public String getOrderStatus() {
+        return status.getOrderStatus();
+    }
+
+    @Override
+    public String getOrderType() {
+        return "AVAILABLE";
     }
 
     public void updateStatus(AvailableOrderStatus status) {

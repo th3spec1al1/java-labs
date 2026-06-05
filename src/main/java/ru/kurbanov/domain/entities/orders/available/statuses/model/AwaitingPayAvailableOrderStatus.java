@@ -6,6 +6,9 @@ import ru.kurbanov.domain.entities.orders.available.statuses.AvailableOrderStatu
 public class AwaitingPayAvailableOrderStatus implements AvailableOrderStatus {
 
     @Override
+    public String getOrderStatus() { return "AWAITING_PAY"; }
+
+    @Override
     public boolean tryCreate(AvailableOrder order) {
         return false;
     }

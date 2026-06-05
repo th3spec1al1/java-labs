@@ -1,9 +1,10 @@
 package ru.kurbanov.domain.services;
 
 import lombok.AllArgsConstructor;
+import ru.kurbanov.application.abstractions.repositories.inmemory.CarRepository;
+import ru.kurbanov.application.abstractions.repositories.inmemory.DetailRepository;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.details.Detail;
-import ru.kurbanov.repositories.*;
 
 import java.util.Collection;
 import java.util.UUID;

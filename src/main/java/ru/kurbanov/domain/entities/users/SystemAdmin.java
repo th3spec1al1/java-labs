@@ -12,4 +12,8 @@ public class SystemAdmin {
     public SystemAdmin() {
         this.id = UUID.randomUUID();
     }
+
+    public SystemAdmin(UUID id) {
+        this.id = id;
+    }
 }

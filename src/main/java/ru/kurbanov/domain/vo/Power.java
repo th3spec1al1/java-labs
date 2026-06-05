@@ -1,6 +1,6 @@
 package ru.kurbanov.domain.vo;
 
-public record Power(long value) {
+public record Power(int value) {
 
     public Power {
         if (value < 0) {

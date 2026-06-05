@@ -4,16 +4,20 @@ import ru.kurbanov.domain.entities.details.Detail;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 public class Transmission extends Detail {
 
-    public Transmission(String name, String brand, BigDecimal price,
-                        List<String> models) {
-        super(name, brand, price, models);
+    public Transmission(String name, BigDecimal price, List<String> models) {
+        super(name, price, models);
+    }
+
+    public Transmission(UUID id, String name, BigDecimal price, List<String> models) {
+        super(id, name, price, models);
     }
 
     @Override
     public String getType() {
-        return "Transmission";
+        return "TRANSMISSION";
     }
 }

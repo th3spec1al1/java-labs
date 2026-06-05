@@ -6,6 +6,9 @@ import ru.kurbanov.domain.entities.orders.custom.statuses.CustomOrderStatus;
 public class GivenOutCarCustomOrderStatus implements CustomOrderStatus {
 
     @Override
+    public String getOrderStatus() { return "GIVEN_OUT"; }
+
+    @Override
     public boolean tryCreate(CustomOrder order) {
         return false;
     }

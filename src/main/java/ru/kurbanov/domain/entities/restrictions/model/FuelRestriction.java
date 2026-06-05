@@ -2,7 +2,7 @@ package ru.kurbanov.domain.entities.restrictions.model;
 
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.restrictions.CarRestriction;
-import ru.kurbanov.domain.enums.FuelType;
+import ru.kurbanov.domain.entities.cars.enums.FuelType;
 
 public record FuelRestriction(FuelType fuelType) implements CarRestriction {
 

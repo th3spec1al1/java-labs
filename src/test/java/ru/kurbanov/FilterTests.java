@@ -1,29 +1,30 @@
 package ru.kurbanov;
 
 import org.junit.jupiter.api.Test;
-import ru.kurbanov.domain.builders.CarBuilder;
-import ru.kurbanov.domain.entities.bodies.Body;
-import ru.kurbanov.domain.entities.bodies.model.Sedan;
+import ru.kurbanov.domain.entities.cars.CarBuilder;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.cars.CarFilter;
+import ru.kurbanov.domain.entities.cars.enums.BodyType;
+import ru.kurbanov.domain.entities.cars.enums.CarDrive;
+import ru.kurbanov.domain.entities.cars.enums.GearboxType;
 import ru.kurbanov.domain.entities.details.Detail;
 import ru.kurbanov.domain.entities.engines.Engine;
-import ru.kurbanov.domain.enums.FuelType;
-import ru.kurbanov.domain.factories.details.model.InteriorFactory;
-import ru.kurbanov.domain.factories.details.model.SteeringWheelFactory;
-import ru.kurbanov.domain.factories.details.model.TransmissionFactory;
-import ru.kurbanov.domain.factories.details.model.WheelsFactory;
+import ru.kurbanov.domain.entities.cars.enums.FuelType;
+import ru.kurbanov.domain.entities.details.factories.model.InteriorFactory;
+import ru.kurbanov.domain.entities.details.factories.model.SteeringWheelFactory;
+import ru.kurbanov.domain.entities.details.factories.model.TransmissionFactory;
+import ru.kurbanov.domain.entities.details.factories.model.WheelsFactory;
 import ru.kurbanov.domain.services.CustomerService;
 import ru.kurbanov.domain.vo.Displacement;
 import ru.kurbanov.domain.vo.Power;
-import ru.kurbanov.repositories.AvailableOrderRepository;
-import ru.kurbanov.repositories.CarRepository;
-import ru.kurbanov.repositories.CustomOrderRepository;
-import ru.kurbanov.repositories.TestDriveRepository;
-import ru.kurbanov.repositories.inmemory.InMemoryAvailableOrderRepository;
-import ru.kurbanov.repositories.inmemory.InMemoryCarRepository;
-import ru.kurbanov.repositories.inmemory.InMemoryCustomOrderRepository;
-import ru.kurbanov.repositories.inmemory.InMemoryTestDriveRepository;
+import ru.kurbanov.application.abstractions.repositories.inmemory.AvailableOrderRepository;
+import ru.kurbanov.application.abstractions.repositories.inmemory.CarRepository;
+import ru.kurbanov.application.abstractions.repositories.inmemory.CustomOrderRepository;
+import ru.kurbanov.application.abstractions.repositories.inmemory.TestDriveRepository;
+import ru.kurbanov.infrastructure.persistence.inmemory.InMemoryAvailableOrderRepository;
+import ru.kurbanov.infrastructure.persistence.inmemory.InMemoryCarRepository;
+import ru.kurbanov.infrastructure.persistence.inmemory.InMemoryCustomOrderRepository;
+import ru.kurbanov.infrastructure.persistence.inmemory.InMemoryTestDriveRepository;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -43,20 +44,41 @@ public class FilterTests {
         TestDriveRepository testDriveRepository = new InMemoryTestDriveRepository();
 
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
-                BigDecimal.ZERO, List.of("320i"));
-        Detail interior = new InteriorFactory().create("Dakota", "BMW",
-                new BigDecimal(110_000), List.of("320i", "330i"));
+        Detail transmission = new TransmissionFactory().create("8AT",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
+                BigDecimal.ZERO, List.of("BMW 320i"));
+        Detail interior = new InteriorFactory().create("Dakota",
+                new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body, "White", price);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body, "Black", price);
+        CarBuilder carBuilder1 = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("White")
+                .basePrice(price)
+                .withSelectedDetail(transmission)
+                .withSelectedDetail(steeringWheel)
+                .withSelectedDetail(wheels);
+        CarBuilder carBuilder2 = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("Black")
+                .basePrice(price)
+                .withSelectedDetail(transmission)
+                .withSelectedDetail(steeringWheel)
+                .withSelectedDetail(wheels);
 
         Car car1 = carBuilder1
                 .withSelectedDetail(transmission)
@@ -78,7 +100,7 @@ public class FilterTests {
                 customOrderRepository, testDriveRepository);
 
         // Act
-        CarFilter carFilter1 = new CarFilter().withBody(new Sedan());
+        CarFilter carFilter1 = new CarFilter().withBody(BodyType.SEDAN);
         CarFilter carFilter2 = new CarFilter().withColor("Black");
         Collection<Car> filteredCars1 = customerService.searchByFilters(carFilter1);
         Collection<Car> filteredCars2 = customerService.searchByFilters(carFilter2);
@@ -98,47 +120,78 @@ public class FilterTests {
         TestDriveRepository testDriveRepository = new InMemoryTestDriveRepository();
 
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price1 = new BigDecimal(4_500_000);
         BigDecimal price2 = new BigDecimal(4_900_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
-                BigDecimal.ZERO, List.of("320i"));
-        Detail interior = new InteriorFactory().create("Dakota", "BMW",
-                new BigDecimal(110_000), List.of("320i", "330i"));
+        Detail transmission = new TransmissionFactory().create("8AT",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
+                BigDecimal.ZERO, List.of("BMW 320i"));
+        Detail interior = new InteriorFactory().create("Dakota",
+                new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body, "Gray", price1);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body, "Black", price1);
-        CarBuilder carBuilder3 = new CarBuilder("BMW", "320i", engine, body, "Gray", price2);
-        CarBuilder carBuilder4 = new CarBuilder("BMW", "320i", engine, body, "Gray", price1);
+        CarBuilder carBuilder1 = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("Gray")
+                .basePrice(price1)
+                .withSelectedDetail(transmission)
+                .withSelectedDetail(steeringWheel)
+                .withSelectedDetail(wheels)
+                .withSelectedDetail(interior);
+        CarBuilder carBuilder2 = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("Black")
+                .basePrice(price1)
+                .withSelectedDetail(transmission)
+                .withSelectedDetail(steeringWheel)
+                .withSelectedDetail(wheels)
+                .withSelectedDetail(interior);
+        CarBuilder carBuilder3 = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("Gray")
+                .basePrice(price2)
+                .withSelectedDetail(transmission)
+                .withSelectedDetail(steeringWheel)
+                .withSelectedDetail(wheels)
+                .withSelectedDetail(interior);
+        CarBuilder carBuilder4 = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("Gray")
+                .basePrice(price1)
+                .withSelectedDetail(transmission)
+                .withSelectedDetail(steeringWheel)
+                .withSelectedDetail(wheels)
+                .withSelectedDetail(interior);
 
         Car car1 = carBuilder1
-                .withSelectedDetail(transmission)
-                .withSelectedDetail(steeringWheel)
-                .withSelectedDetail(wheels)
-                .withSelectedDetail(interior)
                 .build();
         Car car2 = carBuilder2
-                .withSelectedDetail(transmission)
-                .withSelectedDetail(steeringWheel)
-                .withSelectedDetail(wheels)
-                .withSelectedDetail(interior)
                 .build();
         Car car3 = carBuilder3
-                .withSelectedDetail(transmission)
-                .withSelectedDetail(steeringWheel)
-                .withSelectedDetail(wheels)
-                .withSelectedDetail(interior)
                 .build();
         Car car4 = carBuilder4
-                .withSelectedDetail(transmission)
-                .withSelectedDetail(steeringWheel)
-                .withSelectedDetail(wheels)
-                .withSelectedDetail(interior)
                 .build();
 
         carRepository.save(car1);
@@ -170,32 +223,47 @@ public class FilterTests {
         TestDriveRepository testDriveRepository = new InMemoryTestDriveRepository();
 
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
-                BigDecimal.ZERO, List.of("320i"));
-        Detail interior = new InteriorFactory().create("Dakota", "BMW",
-                new BigDecimal(110_000), List.of("320i", "330i"));
+        Detail transmission = new TransmissionFactory().create("8AT",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
+                BigDecimal.ZERO, List.of("BMW 320i"));
+        Detail interior = new InteriorFactory().create("Dakota",
+                new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body, "White", price);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body, "Black", price);
+        CarBuilder carBuilder1 = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("White")
+                .basePrice(price)
+                .withSelectedDetail(transmission)
+                .withSelectedDetail(steeringWheel)
+                .withSelectedDetail(wheels)
+                .withSelectedDetail(interior);
+        CarBuilder carBuilder2 = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("Black")
+                .basePrice(price)
+                .withSelectedDetail(transmission)
+                .withSelectedDetail(steeringWheel)
+                .withSelectedDetail(wheels)
+                .withSelectedDetail(interior);
 
         Car car1 = carBuilder1
-                .withSelectedDetail(transmission)
-                .withSelectedDetail(steeringWheel)
-                .withSelectedDetail(wheels)
-                .withSelectedDetail(interior)
                 .build();
         Car car2 = carBuilder2
-                .withSelectedDetail(transmission)
-                .withSelectedDetail(steeringWheel)
-                .withSelectedDetail(wheels)
-                .withSelectedDetail(interior)
                 .build();
 
         carRepository.save(car1);
@@ -222,20 +290,43 @@ public class FilterTests {
         TestDriveRepository testDriveRepository = new InMemoryTestDriveRepository();
 
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
-                BigDecimal.ZERO, List.of("320i"));
-        Detail interior = new InteriorFactory().create("Dakota", "BMW",
-                new BigDecimal(110_000), List.of("320i", "330i"));
+        Detail transmission = new TransmissionFactory().create("8AT",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
+                BigDecimal.ZERO, List.of("BMW 320i"));
+        Detail interior = new InteriorFactory().create("Dakota",
+                new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder1 = new CarBuilder("BMW", "320i", engine, body, "White", price);
-        CarBuilder carBuilder2 = new CarBuilder("BMW", "320i", engine, body, "Black", price);
+        CarBuilder carBuilder1 = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("White")
+                .basePrice(price)
+                .withSelectedDetail(transmission)
+                .withSelectedDetail(steeringWheel)
+                .withSelectedDetail(wheels)
+                .withSelectedDetail(interior);
+        CarBuilder carBuilder2 = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("Black")
+                .basePrice(price)
+                .withSelectedDetail(transmission)
+                .withSelectedDetail(steeringWheel)
+                .withSelectedDetail(wheels)
+                .withSelectedDetail(interior);
 
         Car car1 = carBuilder1
                 .withSelectedDetail(transmission)

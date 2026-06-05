@@ -1,19 +1,20 @@
 package ru.kurbanov;
 
 import org.junit.jupiter.api.Test;
-import ru.kurbanov.domain.builders.CarBuilder;
-import ru.kurbanov.domain.entities.bodies.Body;
-import ru.kurbanov.domain.entities.bodies.model.Sedan;
+import ru.kurbanov.domain.entities.cars.CarBuilder;
 import ru.kurbanov.domain.entities.cars.Car;
+import ru.kurbanov.domain.entities.cars.enums.BodyType;
+import ru.kurbanov.domain.entities.cars.enums.CarDrive;
+import ru.kurbanov.domain.entities.cars.enums.GearboxType;
 import ru.kurbanov.domain.entities.details.Detail;
 import ru.kurbanov.domain.entities.engines.Engine;
-import ru.kurbanov.domain.enums.FuelType;
+import ru.kurbanov.domain.entities.cars.enums.FuelType;
 import ru.kurbanov.domain.exceptions.DomainValidationException;
 import ru.kurbanov.domain.exceptions.IncompatibleComponentException;
-import ru.kurbanov.domain.factories.details.model.InteriorFactory;
-import ru.kurbanov.domain.factories.details.model.SteeringWheelFactory;
-import ru.kurbanov.domain.factories.details.model.TransmissionFactory;
-import ru.kurbanov.domain.factories.details.model.WheelsFactory;
+import ru.kurbanov.domain.entities.details.factories.model.InteriorFactory;
+import ru.kurbanov.domain.entities.details.factories.model.SteeringWheelFactory;
+import ru.kurbanov.domain.entities.details.factories.model.TransmissionFactory;
+import ru.kurbanov.domain.entities.details.factories.model.WheelsFactory;
 import ru.kurbanov.domain.vo.Displacement;
 import ru.kurbanov.domain.vo.Power;
 
@@ -29,19 +30,27 @@ public class CarTests {
 
         // Arrange
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
-                BigDecimal.ZERO, List.of("320i"));
-        Detail interior = new InteriorFactory().create("Dakota", "BMW",
-                new BigDecimal(110_000), List.of("320i", "330i"));
+        Detail transmission = new TransmissionFactory().create("8AT",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
+                BigDecimal.ZERO, List.of("BMW 320i"));
+        Detail interior = new InteriorFactory().create("Dakota",
+                new BigDecimal(110_000), List.of("BMW 320i", "BMW 330i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body, "White", price)
+        CarBuilder carBuilder = CarBuilder
+                .create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("White")
+                .basePrice(price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
                 .withSelectedDetail(wheels)
@@ -57,10 +66,10 @@ public class CarTests {
         assertEquals(new Power(200), car.getEngine().power());
         assertEquals(new Displacement(4), car.getEngine().displacement());
         assertEquals(FuelType.PETROL, car.getEngine().fuelType());
-        assertTrue(car.getDetails().containsKey("Interior"));
-        assertTrue(car.getDetails().containsKey("SteeringWheel"));
-        assertTrue(car.getDetails().containsKey("Wheels"));
-        assertTrue(car.getDetails().containsKey("Transmission"));
+        assertTrue(car.getDetails().containsKey("INTERIOR"));
+        assertTrue(car.getDetails().containsKey("STEERING_WHEEL"));
+        assertTrue(car.getDetails().containsKey("WHEELS"));
+        assertTrue(car.getDetails().containsKey("TRANSMISSION"));
         assertEquals(new BigDecimal(4_500_000), car.getBasePrice());
         assertEquals(new BigDecimal(4_610_000), car.getFinalPrice());
     }
@@ -70,17 +79,24 @@ public class CarTests {
 
         // Arrange
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
-                BigDecimal.ZERO, List.of("320i"));
+        Detail transmission = new TransmissionFactory().create("8AT",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
+                BigDecimal.ZERO, List.of("BMW 320i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body, "White", price)
+        CarBuilder carBuilder = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("White")
+                .basePrice(price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
                 .withSelectedDetail(wheels);
@@ -89,7 +105,7 @@ public class CarTests {
         Exception exception = assertThrows(DomainValidationException.class, carBuilder::build);
 
         // Assert
-        assertEquals("You can't build car without necessary detail - Interior", exception.getMessage());
+        assertEquals("You can't build car without necessary detail - INTERIOR", exception.getMessage());
     }
 
     @Test
@@ -97,19 +113,26 @@ public class CarTests {
 
         // Arrange
         Engine engine = new Engine(new Power(200), new Displacement(4), FuelType.PETROL);
-        Body body = new Sedan();
         BigDecimal price = new BigDecimal(4_500_000);
 
-        Detail transmission = new TransmissionFactory().create("8AT", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный", "BMW",
-                BigDecimal.ZERO, List.of("320i", "330i"));
-        Detail wheels = new WheelsFactory().create("17’’ Standard", "BMW",
-                BigDecimal.ZERO, List.of("320i"));
-        Detail interior = new InteriorFactory().create("Performance", "BMW",
-                new BigDecimal(110_000), List.of("330i", "340i"));
+        Detail transmission = new TransmissionFactory().create("8AT",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail steeringWheel = new SteeringWheelFactory().create("Спортивный кожаный",
+                BigDecimal.ZERO, List.of("BMW 320i", "BMW 330i"));
+        Detail wheels = new WheelsFactory().create("17’’ Standard",
+                BigDecimal.ZERO, List.of("BMW 320i"));
+        Detail interior = new InteriorFactory().create("Performance",
+                new BigDecimal(110_000), List.of("BMW 330i", "BMW 340i"));
 
-        CarBuilder carBuilder = new CarBuilder("BMW", "320i", engine, body, "White", price)
+        CarBuilder carBuilder = CarBuilder.create()
+                .brand("BMW")
+                .model("320i")
+                .engine(engine)
+                .body(BodyType.SEDAN)
+                .carDrive(CarDrive.FRONT)
+                .gearboxType(GearboxType.AUTOMATIC)
+                .color("White")
+                .basePrice(price)
                 .withSelectedDetail(transmission)
                 .withSelectedDetail(steeringWheel)
                 .withSelectedDetail(wheels);

@@ -4,6 +4,8 @@ import ru.kurbanov.domain.entities.orders.custom.CustomOrder;
 
 public interface CustomOrderStatus {
 
+    String getOrderStatus();
+
     boolean tryCreate(CustomOrder order);
     boolean tryAgreedByWarehouse(CustomOrder order);
     boolean tryAwaitPay(CustomOrder order);
