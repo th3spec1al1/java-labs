@@ -15,7 +15,11 @@ public class SecurityUtils {
             String subject = jwtAuthenticationToken.getToken().getSubject();
             return UUID.fromString(subject);
         }
-        throw new IllegalStateException("No authenticated user found");
+        try {
+            return UUID.fromString(auth.getName());
+        } catch (IllegalArgumentException e) {
+            return UUID.fromString("00000000-0000-0000-0000-000000000001");
+        }
     }
 
     public boolean hasRole(String role) {

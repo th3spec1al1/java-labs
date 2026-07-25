@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.web.SecurityFilterChain;
 
 @TestConfiguration
-@EnableMethodSecurity(prePostEnabled = false)
 public class TestSecurityConfig {
 
     @Bean
