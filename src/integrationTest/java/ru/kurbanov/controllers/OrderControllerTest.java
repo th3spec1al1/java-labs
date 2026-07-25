@@ -6,12 +6,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.context.annotation.Import;
 import ru.kurbanov.TestCarDealershipApplication;
+import ru.kurbanov.config.TestSecurityConfig;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@Import(TestSecurityConfig.class)
 public class OrderControllerTest extends TestCarDealershipApplication {
 
     @LocalServerPort
@@ -29,7 +32,7 @@ public class OrderControllerTest extends TestCarDealershipApplication {
                 .when()
                 .get("/orders/00000000-0000-0000-0000-000000000000")
                 .then()
-                .statusCode(anyOf(is(404), is(403)));
+                .statusCode(404);
     }
 
     @Test
@@ -40,7 +43,9 @@ public class OrderControllerTest extends TestCarDealershipApplication {
                 .when()
                 .post("/orders/filter")
                 .then()
-                .statusCode(anyOf(is(200), is(403)));
+                .statusCode(200)
+                .body("size()", greaterThan(0))
+                .body("orderType", everyItem(equalTo("AVAILABLE")));
     }
 
     @Test
@@ -50,7 +55,9 @@ public class OrderControllerTest extends TestCarDealershipApplication {
                 .when()
                 .get("/orders/f1111111-1111-1111-1111-111111111111")
                 .then()
-                .statusCode(anyOf(is(200), is(403)));
+                .statusCode(200)
+                .body("orderType", equalTo("AVAILABLE"))
+                .body("orderStatus", equalTo("CREATED"));
     }
 
     @Test
@@ -58,8 +65,7 @@ public class OrderControllerTest extends TestCarDealershipApplication {
         String body = """
         {
           "orderType": "AVAILABLE",
-          "orderedCarId": "e1111111-1111-1111-1111-111111111111",
-          "customerId": "cccccccc-cccc-cccc-cccc-cccccccccccc"
+          "orderedCarId": "e1111111-1111-1111-1111-111111111111"
         }
         """;
 
@@ -69,6 +75,8 @@ public class OrderControllerTest extends TestCarDealershipApplication {
                 .when()
                 .post("/orders")
                 .then()
-                .statusCode(anyOf(is(200), is(403)));
+                .statusCode(201)
+                .body("id", notNullValue())
+                .body("orderType", equalTo("AVAILABLE"));
     }
 }
