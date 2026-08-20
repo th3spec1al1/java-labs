@@ -1,5 +1,3 @@
 databaseChangeLog:
-  - includeAll:
-      path: db/changelog/
-      relativeToChangelogFile: false
-      errorIfMissingOrEmpty: false
+  - include:
+      file: db/changelog/001-create-tables.yml

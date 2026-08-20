@@ -1,15 +1,26 @@
 version: '3.8'
 services:
-  postgres:
+  postgres-order:
     image: postgres:16
     environment:
-      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_DB: order_db
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata-order:/var/lib/postgresql/data
+
+  postgres-storage:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: storage_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata-storage:/var/lib/postgresql/data
 
   keycloak:
     image: quay.io/keycloak/keycloak:24.0
@@ -20,7 +31,8 @@ services:
     ports:
       - "8081:8080"
     depends_on:
-      - postgres
+      - postgres-order
 
 volumes:
-  pgdata:
+  pgdata-order:
+  pgdata-storage:
