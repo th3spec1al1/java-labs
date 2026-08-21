@@ -18,10 +18,24 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: source_order_type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: car_id
+                  type: uuid
+              - column:
+                  name: model_id
+                  type: uuid
+              - column:
                   name: status
                   type: varchar(50)
                   constraints:
                     nullable: false
+              - column:
+                  name: warehouse_admin_id
+                  type: uuid
               - column:
                   name: removed
                   type: boolean
@@ -36,5 +50,23 @@ databaseChangeLog:
               - column:
                   name: updated_at
                   type: timestamp with time zone
+                  constraints:
+                    nullable: false
+
+  - changeSet:
+      id: create-assembly-order-required-components
+      author: ru.kurbanov
+      changes:
+        - createTable:
+            tableName: assembly_order_required_components
+            columns:
+              - column:
+                  name: assembly_order_id
+                  type: uuid
+                  constraints:
+                    nullable: false
+              - column:
+                  name: component_id
+                  type: uuid
                   constraints:
                     nullable: false
