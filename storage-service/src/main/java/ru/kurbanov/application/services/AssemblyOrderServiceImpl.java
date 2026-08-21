@@ -59,4 +59,20 @@ public class AssemblyOrderServiceImpl implements AssemblyOrderService {
                 .orElseThrow(() -> new EntityNotFoundException("Assembly order not found: " + id));
         entity.setRemoved(true);
     }
+
+    @Override
+    public AssemblyOrderResponseDto updateStatus(UUID id, String status) {
+        AssemblyOrderEntity entity = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Assembly order not found: " + id));
+        entity.setStatus(status);
+        return mapper.toDto(entity);
+    }
+
+    @Override
+    public AssemblyOrderResponseDto assignWarehouseAdmin(UUID id, UUID warehouseAdminId) {
+        AssemblyOrderEntity entity = repository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Assembly order not found: " + id));
+        entity.setWarehouseAdminId(warehouseAdminId);
+        return mapper.toDto(entity);
+    }
 }

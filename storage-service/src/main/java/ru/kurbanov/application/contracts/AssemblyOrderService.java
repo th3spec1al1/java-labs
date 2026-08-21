@@ -17,4 +17,8 @@ public interface AssemblyOrderService {
     AssemblyOrderResponseDto update(UUID id, AssemblyOrderRequestDto request);
 
     void delete(UUID id);
+
+    AssemblyOrderResponseDto updateStatus(UUID id, String status);
+
+    AssemblyOrderResponseDto assignWarehouseAdmin(UUID id, UUID warehouseAdminId);
 }
