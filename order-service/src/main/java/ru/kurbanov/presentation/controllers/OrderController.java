@@ -104,4 +104,11 @@ public class OrderController {
         orderService.removeOrder(id);
         return ResponseEntity.ok().build();
     }
+
+    @Operation(summary = "Pay the order")
+    @PatchMapping("/{id}/pay")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    public ResponseEntity<OrderResponseDto> payOrder(@PathVariable UUID id) {
+        return ResponseEntity.ok(orderService.payOrder(id));
+    }
 }

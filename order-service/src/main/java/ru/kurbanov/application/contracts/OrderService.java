@@ -18,4 +18,6 @@ public interface OrderService {
     OrderResponseDto updateOrder(UUID orderId, OrderRequestDto orderRequestDto);
 
     void removeOrder(UUID orderId);
+
+    OrderResponseDto payOrder(UUID orderId);
 }

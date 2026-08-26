@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import ru.kurbanov.application.abstractions.repositories.jpa.JpaCarRepository;
 import ru.kurbanov.application.abstractions.repositories.jpa.JpaOrderRepository;
 import ru.kurbanov.application.contracts.OrderService;
+import ru.kurbanov.application.events.OrderSentForApprovalEvent;
 import ru.kurbanov.config.SecurityUtils;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.details.Detail;
@@ -44,6 +45,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderDtoMapper orderDtoMapper;
     private final CarDetailsLoader carDetailsLoader;
     private final SecurityUtils securityUtils;
+    private final OutboxEventService outboxEventService;
 
     private OrderResponseDto toDto(OrderEntity orderEntity) {
         Customer customer = new Customer(orderEntity.getCustomerId());
@@ -122,5 +124,32 @@ public class OrderServiceImpl implements OrderService {
         }
 
         orderRepository.deleteById(orderId);
+    }
+
+    @Override
+    public OrderResponseDto payOrder(UUID orderId) {
+        OrderEntity orderEntity = orderRepository.findById(orderId)
+                .orElseThrow(() -> new EntityNotFoundException("Order not found: " + orderId));
+
+        if ("AVAILABLE".equalsIgnoreCase(orderEntity.getOrderType())) {
+            orderEntity.setOrderStatus("PAID");
+        } else if ("CUSTOM".equalsIgnoreCase(orderEntity.getOrderType())) {
+            orderEntity.setOrderStatus("PAID");
+        } else {
+            throw new IllegalArgumentException("Unknown order type: " + orderEntity.getOrderType());
+        }
+
+        orderRepository.save(orderEntity);
+
+        String traceId = UUID.randomUUID().toString();
+        OrderSentForApprovalEvent event = new OrderSentForApprovalEvent(
+                orderEntity.getId(),
+                orderEntity.getOrderType(),
+                orderEntity.getOrderedCarId(),
+                traceId
+        );
+        outboxEventService.save(orderEntity.getId(), "OrderSentForApproval", event, traceId);
+
+        return toDto(orderEntity);
     }
 }
