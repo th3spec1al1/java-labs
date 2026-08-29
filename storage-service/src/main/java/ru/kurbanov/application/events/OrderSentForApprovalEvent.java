@@ -11,6 +11,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderSentForApprovalEvent {
+
     private UUID eventId;
     private String traceId;
     private UUID orderId;

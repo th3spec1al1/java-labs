@@ -143,10 +143,14 @@ public class OrderServiceImpl implements OrderService {
 
         String traceId = UUID.randomUUID().toString();
         OrderSentForApprovalEvent event = new OrderSentForApprovalEvent(
+                UUID.randomUUID(),
+                traceId,
                 orderEntity.getId(),
                 orderEntity.getOrderType(),
+                orderEntity.getCustomerId(),
                 orderEntity.getOrderedCarId(),
-                traceId
+                null,
+                null
         );
         outboxEventService.save(orderEntity.getId(), "OrderSentForApproval", event, traceId);
 
