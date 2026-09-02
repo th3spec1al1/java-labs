@@ -27,7 +27,6 @@ public class OutboxEventEntity {
     @Column(name = "aggregate_id", nullable = false)
     private UUID aggregateId;
 
-    @Lob
     @Column(nullable = false)
     private String payload;
 

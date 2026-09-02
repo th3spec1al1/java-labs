@@ -8,8 +8,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
 import org.testcontainers.containers.PostgreSQLContainer;
-import org.testcontainers.junit.jupiter.Testcontainers;
 import ru.kurbanov.config.TestSecurityConfig;
+import org.testcontainers.junit.jupiter.Testcontainers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -19,10 +19,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ActiveProfiles("test")
 @Import(TestSecurityConfig.class)
-@EnableJpaRepositories("ru.kurbanov.application.abstractions.repositories.jpa")
+@EnableJpaRepositories("ru.kurbanov.infrastructure.persistence.jpa")
 @EntityScan("ru.kurbanov.infrastructure.persistence.jpa.model")
 @Testcontainers
-public class TestCarDealershipApplication {
+public class TestStorageServiceApplication {
 
     static final PostgreSQLContainer<?> postgres;
 
@@ -41,7 +41,7 @@ public class TestCarDealershipApplication {
         registry.add("spring.datasource.password", postgres::getPassword);
         registry.add("spring.liquibase.change-log",
                 () -> "classpath:db/changelog/db.changelog-master.yml");
-        registry.add("spring.kafka.bootstrap-servers", () -> "localhost:29092");
+        registry.add("spring.kafka.bootstrap-servers", () -> "localhost:9092");
     }
 
     @Test
