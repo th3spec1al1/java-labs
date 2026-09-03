@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+    url: jdbc:postgresql://${STORAGE_POSTGRES_HOST}:${STORAGE_POSTGRES_PORT}/${STORAGE_POSTGRES_DB}
     username: ${POSTGRES_USER}
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
@@ -12,7 +12,7 @@ spring:
       ddl-auto: validate
     show-sql: true
   liquibase:
-    change-log: classpath:db/changelog/db.changelog-master.yml
+    change-log: classpath:db.changelog/db.changelog-master.yml
     enabled: true
   security:
     oauth2:
