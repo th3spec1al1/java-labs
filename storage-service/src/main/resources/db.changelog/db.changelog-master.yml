@@ -8,3 +8,6 @@ databaseChangeLog:
   - include:
       file: 003-create-processed-messages.yml
       relativeToChangelogFile: true
+  - include:
+      file: 004-create-storage-cars.yml
+      relativeToChangelogFile: true
