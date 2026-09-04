@@ -29,5 +29,12 @@ spring:
       properties:
         spring.json.trusted.packages: "*"
 
+grpc:
+  client:
+    address: static://localhost:9090
+    negotiation-type: plaintext
+    deadline-after: 5000
+    deadline-after-unit: MILLISECONDS
+
 server:
   port: 8080
