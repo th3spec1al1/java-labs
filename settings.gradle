@@ -2,3 +2,4 @@ rootProject.name = 'car-dealership'
 
 include 'order-service'
 include 'storage-service'
+include 'grpc-contracts'
