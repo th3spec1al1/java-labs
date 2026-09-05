@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: create-storage-cars
+      id: create-storage-cars-v2
       author: ru.kurbanov
       changes:
         - createTable:
-            tableName: storage-cars
+            tableName: storage_cars
             columns:
               - column:
                   name: id

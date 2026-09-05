@@ -8,8 +8,9 @@ spring:
     password: ${POSTGRES_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
-    hibernate:
-      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
     show-sql: true
   liquibase:
     change-log: classpath:db.changelog/db.changelog-master.yml
@@ -35,3 +36,8 @@ spring:
 grpc:
   server:
     port: 9090
+
+logging:
+  level:
+    org.hibernate.orm.jdbc.bind: trace
+    com.zaxxer.hikari: debug

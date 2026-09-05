@@ -21,8 +21,9 @@ public class CarGrpcClient {
     public List<CarsProto.Car> listAvailableCars() {
         log.info("grpc call: listAvailableCars");
         try {
-            CarsProto.CarListResponse response =
-                    carServiceStub.listAvailableCars(CarsProto.Empty.newBuilder().build());
+            CarsProto.CarListResponse response = carServiceStub
+                    .withDeadlineAfter(5, java.util.concurrent.TimeUnit.SECONDS)
+                    .listAvailableCars(CarsProto.Empty.newBuilder().build());
             log.info("grpc response: {} cars received", response.getCarsList().size());
             return response.getCarsList();
         } catch (StatusRuntimeException e) {
@@ -35,8 +36,9 @@ public class CarGrpcClient {
     public Optional<CarsProto.Car> getCarById(String id) {
         log.info("grpc call: getCarById id={}", id);
         try {
-            CarsProto.Car car = carServiceStub.getCarById(
-                    CarsProto.CarRequest.newBuilder().setId(id).build());
+            CarsProto.Car car = carServiceStub
+                    .withDeadlineAfter(5, java.util.concurrent.TimeUnit.SECONDS)
+                    .getCarById(CarsProto.CarRequest.newBuilder().setId(id).build());
             log.info("grpc response: car found id={}", id);
             return Optional.of(car);
         } catch (StatusRuntimeException e) {

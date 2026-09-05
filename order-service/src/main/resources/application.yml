@@ -31,10 +31,11 @@ spring:
 
 grpc:
   client:
-    address: static://localhost:9090
-    negotiation-type: plaintext
-    deadline-after: 5000
-    deadline-after-unit: MILLISECONDS
+    storage-service:
+      address: static://localhost:9090
+      negotiation-type: plaintext
+      keep-alive-time: 5s
+      keep-alive-timeout: 3s
 
 server:
   port: 8080
