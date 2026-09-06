@@ -3,7 +3,7 @@ package ru.kurbanov.presentation.grpc;
 import io.grpc.stub.StreamObserver;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.devh.boot.grpc.server.service.GrpcService;
+import org.springframework.stereotype.Service;
 import ru.kurbanov.domain.entities.CarStatus;
 import ru.kurbanov.infrastructure.persistence.jpa.JpaCarRepository;
 import ru.kurbanov.infrastructure.persistence.jpa.model.CarEntity;
@@ -13,7 +13,7 @@ import ru.kurbanov.proto.storage.CarsProto;
 import java.util.List;
 
 @Slf4j
-@GrpcService
+@Service
 @RequiredArgsConstructor
 public class CarGrpcService extends CarServiceGrpc.CarServiceImplBase {
 

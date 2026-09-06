@@ -1,8 +1,8 @@
 package ru.kurbanov.application.services;
 
 import io.grpc.StatusRuntimeException;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import net.devh.boot.grpc.client.inject.GrpcClient;
 import org.springframework.stereotype.Service;
 import ru.kurbanov.domain.exceptions.StorageServiceUnavailableException;
 import ru.kurbanov.proto.storage.CarServiceGrpc;
@@ -13,10 +13,10 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@RequiredArgsConstructor
 public class CarGrpcClient {
 
-    @GrpcClient("storage-service")
-    private CarServiceGrpc.CarServiceBlockingStub carServiceStub;
+    private final CarServiceGrpc.CarServiceBlockingStub carServiceStub;
 
     public List<CarsProto.Car> listAvailableCars() {
         log.info("grpc call: listAvailableCars");
