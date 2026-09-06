@@ -42,6 +42,8 @@ public class TestStorageServiceApplication {
         registry.add("spring.liquibase.change-log",
                 () -> "classpath:db/changelog/db.changelog-master.yml");
         registry.add("spring.kafka.bootstrap-servers", () -> "localhost:9092");
+        registry.add("spring.kafka.listener.auto-startup", () -> false);
+        registry.add("grpc.server.port", () -> "0");
     }
 
     @Test

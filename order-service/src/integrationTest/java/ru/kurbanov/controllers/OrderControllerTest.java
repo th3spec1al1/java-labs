@@ -9,6 +9,8 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.context.annotation.Import;
 import ru.kurbanov.TestCarDealershipApplication;
 import ru.kurbanov.config.TestSecurityConfig;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import ru.kurbanov.application.services.CarGrpcClient;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -16,6 +18,9 @@ import static org.hamcrest.Matchers.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Import(TestSecurityConfig.class)
 public class OrderControllerTest extends TestCarDealershipApplication {
+
+    @MockBean
+    private CarGrpcClient carGrpcClient;
 
     @LocalServerPort
     private int serverPort;
