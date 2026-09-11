@@ -2,6 +2,7 @@ package ru.kurbanov.application.services;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -29,13 +30,17 @@ public class OutboxPublisher {
 
         for (OutboxEventEntity event : events) {
             try {
+                MDC.put("traceId", event.getTraceId());
                 kafkaTemplate.send(event.getEventType(), event.getAggregateId().toString(), event.getPayload());
                 event.setPublishedAt(Instant.now());
-                log.info("Published outbox event: type={}, aggregateId={}", event.getEventType(), event.getAggregateId());
+                log.info("Published outbox event: type={}, aggregateId={}",
+                        event.getEventType(), event.getAggregateId());
             } catch (Exception e) {
                 event.setAttempts(event.getAttempts() + 1);
                 event.setLastError(e.getMessage());
                 log.error("Failed to publish outbox event: id={}, attempt={}", event.getId(), event.getAttempts(), e);
+            } finally {
+                MDC.remove("traceId");
             }
         }
     }
