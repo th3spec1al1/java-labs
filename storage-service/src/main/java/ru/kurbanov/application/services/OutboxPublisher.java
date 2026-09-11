@@ -7,7 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kurbanov.application.abstractions.repositories.jpa.JpaOutboxEventRepository;
+import ru.kurbanov.infrastructure.persistence.jpa.JpaOutboxEventRepository;
 import ru.kurbanov.infrastructure.persistence.jpa.model.OutboxEventEntity;
 
 import java.time.Instant;

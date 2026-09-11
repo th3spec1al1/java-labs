@@ -50,3 +50,14 @@ databaseChangeLog:
               - column:
                   name: last_error
                   type: text
+
+  - changeSet:
+      id: add-trace-id-to-outbox-events
+      author: ru.kurbanov
+      changes:
+        - addColumn:
+            tableName: outbox_events
+            columns:
+              - column:
+                  name: trace_id
+                  type: varchar(64)
