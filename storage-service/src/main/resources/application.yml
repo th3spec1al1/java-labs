@@ -9,7 +9,7 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: true
+      ddl-auto: validate
     show-sql: false
   liquibase:
     change-log: classpath:db.changelog/db.changelog-master.yml
@@ -35,3 +35,9 @@ spring:
 grpc:
   server:
     port: ${GRPC_SERVER_PORT:9090}
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] [traceId=%X{traceId}] %-5level %logger{36} - %msg%n"
+  level:
+    root: INFO
