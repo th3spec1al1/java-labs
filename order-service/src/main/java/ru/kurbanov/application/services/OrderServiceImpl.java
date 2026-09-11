@@ -161,7 +161,7 @@ public class OrderServiceImpl implements OrderService {
                 null
         );
 
-        outboxEventService.save(orderEntity.getId(), "OrderSentForApproval", event, traceId);
+        outboxEventService.save(orderEntity.getId(), "order-events", event, traceId);
 
         return toDto(orderEntity);
     }
