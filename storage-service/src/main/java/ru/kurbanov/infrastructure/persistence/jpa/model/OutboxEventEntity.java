@@ -30,6 +30,9 @@ public class OutboxEventEntity {
     @Column(nullable = false)
     private String payload;
 
+    @Column(name = "trace_id")
+    private String traceId;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;

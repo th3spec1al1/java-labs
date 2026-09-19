@@ -26,10 +26,11 @@ public class OutboxEventService {
             event.setEventId(UUID.randomUUID());
             event.setAggregateId(aggregateId);
             event.setEventType(eventType);
+            event.setTraceId(traceId);
             event.setPayload(json);
             event.setAttempts(0);
             outboxEventRepository.save(event);
-            log.info("Outbox event saved: type={}, aggregateId={}", eventType, aggregateId);
+            log.info("Outbox event saved: type={}, aggregateId={}, traceId={}", eventType, aggregateId, traceId);
         } catch (Exception e) {
             log.error("Failed to save outbox event", e);
             throw new RuntimeException("Failed to save outbox event", e);

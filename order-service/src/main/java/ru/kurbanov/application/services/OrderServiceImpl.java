@@ -10,6 +10,7 @@ import ru.kurbanov.application.abstractions.repositories.jpa.JpaOrderRepository;
 import ru.kurbanov.application.contracts.OrderService;
 import ru.kurbanov.application.events.OrderSentForApprovalEvent;
 import ru.kurbanov.config.SecurityUtils;
+import ru.kurbanov.config.TraceIdUtils;
 import ru.kurbanov.domain.entities.cars.Car;
 import ru.kurbanov.domain.entities.details.Detail;
 import ru.kurbanov.domain.entities.orders.Order;
@@ -46,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
     private final CarDetailsLoader carDetailsLoader;
     private final SecurityUtils securityUtils;
     private final OutboxEventService outboxEventService;
+    private final TraceIdUtils traceIdUtils;
 
     private OrderResponseDto toDto(OrderEntity orderEntity) {
         Customer customer = new Customer(orderEntity.getCustomerId());
@@ -127,9 +129,14 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    @Transactional
     public OrderResponseDto payOrder(UUID orderId) {
         OrderEntity orderEntity = orderRepository.findById(orderId)
                 .orElseThrow(() -> new EntityNotFoundException("Order not found: " + orderId));
+
+        if ("PAID".equalsIgnoreCase(orderEntity.getOrderStatus())) {
+            return toDto(orderEntity);
+        }
 
         if ("AVAILABLE".equalsIgnoreCase(orderEntity.getOrderType())) {
             orderEntity.setOrderStatus("PAID");
@@ -141,7 +148,8 @@ public class OrderServiceImpl implements OrderService {
 
         orderRepository.save(orderEntity);
 
-        String traceId = UUID.randomUUID().toString();
+        String traceId = traceIdUtils.getCurrentTraceId();
+
         OrderSentForApprovalEvent event = new OrderSentForApprovalEvent(
                 UUID.randomUUID(),
                 traceId,
@@ -152,7 +160,8 @@ public class OrderServiceImpl implements OrderService {
                 null,
                 null
         );
-        outboxEventService.save(orderEntity.getId(), "OrderSentForApproval", event, traceId);
+
+        outboxEventService.save(orderEntity.getId(), "order-events", event, traceId);
 
         return toDto(orderEntity);
     }

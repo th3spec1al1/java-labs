@@ -3,6 +3,7 @@ package ru.kurbanov.application.services;
 import io.grpc.StatusRuntimeException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Service;
 import ru.kurbanov.domain.exceptions.StorageServiceUnavailableException;
 import ru.kurbanov.proto.storage.CarServiceGrpc;
@@ -19,7 +20,7 @@ public class CarGrpcClient {
     private final CarServiceGrpc.CarServiceBlockingStub carServiceStub;
 
     public List<CarsProto.Car> listAvailableCars() {
-        log.info("grpc call: listAvailableCars");
+        log.info("grpc call: listAvailableCars traceId={}", MDC.get("traceId"));
         try {
             CarsProto.CarListResponse response = carServiceStub
                     .withDeadlineAfter(5, java.util.concurrent.TimeUnit.SECONDS)
@@ -34,7 +35,7 @@ public class CarGrpcClient {
     }
 
     public Optional<CarsProto.Car> getCarById(String id) {
-        log.info("grpc call: getCarById id={}", id);
+        log.info("grpc call: getCarById id={} traceId={}", id, MDC.get("traceId"));
         try {
             CarsProto.Car car = carServiceStub
                     .withDeadlineAfter(5, java.util.concurrent.TimeUnit.SECONDS)
