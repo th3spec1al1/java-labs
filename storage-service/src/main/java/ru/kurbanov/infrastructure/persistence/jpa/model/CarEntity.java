@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import ru.kurbanov.domain.entities.CarStatus;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -11,35 +13,31 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "outbox_events")
-public class OutboxEventEntity {
+@Table(name = "storage_cars")
+public class CarEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "event_id", nullable = false, unique = true)
-    private UUID eventId;
-
-    @Column(name = "event_type", nullable = false)
-    private String eventType;
-
-    @Column(name = "aggregate_id", nullable = false)
-    private UUID aggregateId;
+    @Column(name = "model_id", nullable = false)
+    private UUID modelId;
 
     @Column(nullable = false)
-    private String payload;
+    private String vin;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private CarStatus status;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Instant createdAt;
 
-    @Column(name = "published_at")
-    private Instant publishedAt;
+    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
+    private Instant updatedAt;
 
     @Column(nullable = false)
-    private int attempts = 0;
-
-    @Column(name = "last_error")
-    private String lastError;
+    private boolean removed = false;
 }

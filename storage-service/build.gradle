@@ -12,6 +12,11 @@ sourceSets {
     }
 }
 
+dependencies {
+    implementation project(':grpc-contracts')
+    implementation 'io.grpc:grpc-netty-shaded:1.57.0'
+}
+
 idea {
     module {
         testSources.from sourceSets.integrationTest.java.srcDirs

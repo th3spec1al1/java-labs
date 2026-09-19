@@ -32,6 +32,8 @@ services:
       - "8081:8080"
     depends_on:
       - postgres-order
+    volumes:
+      - keycloak_data:/opt/keycloak/data
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
@@ -97,3 +99,4 @@ services:
 volumes:
   pgdata-order:
   pgdata-storage:
+  keycloak_data:

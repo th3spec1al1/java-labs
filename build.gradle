@@ -63,4 +63,8 @@ subprojects {
             events 'passed', 'skipped', 'failed'
         }
     }
+
+    processResources {
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    }
 }

@@ -1,10 +1,6 @@
-dependencies {
-
-}
-
 configurations {
-    integrationTestImplementation.extendsFrom testImplementation
-    integrationTestRuntimeOnly.extendsFrom testRuntimeOnly
+    integrationTestImplementation.extendsFrom testImplementation, implementation
+    integrationTestRuntimeOnly.extendsFrom runtimeOnly
 }
 
 sourceSets {
@@ -14,6 +10,11 @@ sourceSets {
         compileClasspath += sourceSets.main.output + configurations.testRuntimeClasspath
         runtimeClasspath += output + compileClasspath
     }
+}
+
+dependencies {
+    implementation project(':grpc-contracts')
+    implementation 'io.grpc:grpc-netty-shaded:1.57.0'
 }
 
 idea {

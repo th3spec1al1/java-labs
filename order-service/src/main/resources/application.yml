@@ -1,3 +1,6 @@
+server:
+  port: 8080
+
 spring:
   datasource:
     url: jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
@@ -29,5 +32,8 @@ spring:
       properties:
         spring.json.trusted.packages: "*"
 
-server:
-  port: 8080
+grpc:
+  client:
+    storage-service:
+      host: ${STORAGE_SERVER_HOST:localhost}
+      port: ${STORAGE_SERVER_PORT:9090}
